@@ -6,11 +6,13 @@
   "dependencies": {
     "express-session": "^1.17.0",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pg": "^7.12.1"
   },
   "devDependencies": {},
   "scripts": {
     "dev": "nodemon app.js",
+    "setup": "node setup.js",
     "test": "npm run eslint",
     "start": "node app.js"
   },
