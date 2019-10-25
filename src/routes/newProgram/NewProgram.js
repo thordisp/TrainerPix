@@ -32,7 +32,7 @@ class NewProgram extends React.Component {
     return (
       <div className="programContainer">
         <div className="programForm">
-        <form action="/action_page.php" method="post" onSubmit={this.handleSubmit}>
+        <form action="/program/new" method="post" onSubmit={this.handleSubmit}>
           <label>
             Client:
             <input type="text" name="client"  onChange={this.handleChange} />

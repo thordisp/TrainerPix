@@ -3,7 +3,7 @@ require('dotenv').config();
 const fs = require('fs');
 const util = require('util');
 
-const { query } = require('./db');
+const { query } = require('./utils/db');
 
 const connectionString = process.env.DATABASE_URL;
 
@@ -18,7 +18,7 @@ async function main() {
 
   // búa til töflur út frá skema
   try {
-    const createTable = await readFileAsync('./schema.sql');
+    const createTable = await readFileAsync('./sql/schema.sql');
     await query(createTable.toString('utf8'));
     console.info('Töflur búnar til');
   } catch (e) {
@@ -28,7 +28,7 @@ async function main() {
 
   // bæta færslum við töflur
   try {
-    const insert = await readFileAsync('./insert.sql');
+    const insert = await readFileAsync('./sql/insert.sql');
     await query(insert.toString('utf8'));
     console.info('Gögnum bætt við');
   } catch (e) {
