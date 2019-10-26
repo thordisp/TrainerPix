@@ -1,6 +1,7 @@
 import React from 'react';
 import './NewProgram.scss';
 import Webcam from '../../components/webcam/Webcam';
+import { addExercise } from '../../api';
 
 class NewProgram extends React.Component {
 
@@ -19,20 +20,23 @@ class NewProgram extends React.Component {
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
-
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    console.log('client: ' + this.state.client + ', sets: ' + this.state.sets + ', reps: ' +
-                  this.state.reps + ', description: ' + this.state.description);
+    const created = await addExercise(this.state.client, this.state.sets, this.state.reps, this.state.description);
+    if (!created.ok) {
+      console.log('Villa við að bæta við æfingu.');
+    } else {
+      console.log('Æfingu var bætt við.');
+    }
   }
 
   render() {
     return (
       <div className="programContainer">
         <div className="programForm">
-        <form action="/program/new" method="post" onSubmit={this.handleSubmit}>
+        <form action="/program" method="post" onSubmit={this.handleSubmit}>
           <label>
             Client:
             <input type="text" name="client"  onChange={this.handleChange} />

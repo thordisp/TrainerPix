@@ -17,10 +17,7 @@ async function getProgram(id) {
     WHERE
       userId = $1`;
 
-  const program = await query(
-    q,
-    [id],
-  );
+  const program = await query(q, [id]);
 
   return program.rows;
 }

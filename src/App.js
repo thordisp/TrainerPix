@@ -31,7 +31,7 @@ function App(props: Props) {
           <Switch location={props.location}>
             <Route path="/" exact component={Home} />
             <Route path="/about" exact component={About} />
-            <Route path="/newprogram" exact component={NewProgram} />
+            <Route path="/program" exact component={NewProgram} />
             {/* <Route path="/register" exact component={Register} /> */}
             {/* <Route path="/login" exact component={Login} /> */}
             <Route component={NotFound} />

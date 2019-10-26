@@ -99,23 +99,27 @@ export default class CaptureImage extends React.Component {
 
     return (
       <div>
-        <Webcam
-          audio={false}
-          height={350}
-          ref={this.setRef}
-          screenshotFormat="image/jpeg"
-          width={350}
-          videoConstraints={videoConstraints}
-        />
-        <div className="button-container"><button onClick={this.capture}>Capture photo</button></div>
-        {this.state.imageData ?
-          <div>
-            <p><img src={this.state.imageData} alt="" /></p>
-            <span><button onClick={this.onClickRetake}>Retake?</button></span>
-            <span><button onClick={this.onClickSave}>Save</button></span>
-            {this.state.saveImage ? this.saveForm() : null}
+        <ThemeProvider theme={theme}>
+          <Webcam
+            audio={false}
+            height={350}
+            ref={this.setRef}
+            screenshotFormat="image/jpeg"
+            width={350}
+            videoConstraints={videoConstraints}
+          />
+          <div className="button-container">
+            <Button color="primary" onClick={this.capture}>Capture photo</Button>
           </div>
-        : null}
+          {this.state.imageData ?
+            <div>
+              <p><img src={this.state.imageData} alt="" /></p>
+              <Button color="secondary" onClick={this.onClickRetake}>Retake?</Button>
+              <Button color="secondary" onClick={this.onClickSave}>Save</Button>
+              {this.state.saveImage ? this.saveForm() : null}
+            </div>
+          : null}
+        </ThemeProvider>
       </div>
     );
   }
