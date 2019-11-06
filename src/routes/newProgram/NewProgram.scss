@@ -1,8 +1,8 @@
 @import '../../config.scss';
 
 .booth {
+  display: flex;
+  flex-direction: column;
   width: 400px;
-  background-color: #ccc;
-  border: 10px solid #ddd;
   margin: 0 auto;
 }
