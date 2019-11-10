@@ -31,12 +31,10 @@ class NewProgram extends React.Component {
 
   toggleFirstCam() {
     this.setState({ firstWebcamEnabled: !this.state.firstWebcamEnabled });
-    console.log("toggleFirstCam activated, is firstCamEnabled: " + this.state.firstWebcamEnabled);
   }
 
   toggleSecondCam() {
     this.setState({ secondWebcamEnabled: !this.state.secondWebcamEnabled });
-    console.log("toggleSecondCam activated, is secondCamEnabled: " + this.state.secondWebcamEnabled);
   }
 
   render() {

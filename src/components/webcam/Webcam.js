@@ -23,7 +23,6 @@ export default class WebcamCapture extends React.Component {
     const imageSrc = this.webcam.getScreenshot();
     this.props.updateFirstImage(imageSrc);
     this.props.toggleFirstCam();
-    console.log("image1: " + this.props.image1);
   }
 
   captureSecond = (e) => {
@@ -31,7 +30,6 @@ export default class WebcamCapture extends React.Component {
     const imageSrc = this.webcam.getScreenshot();
     this.props.updateSecondImage(imageSrc);
     this.props.toggleSecondCam();
-    console.log("image2: " + this.props.image2);
   }
 
   render() {

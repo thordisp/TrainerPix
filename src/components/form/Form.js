@@ -37,17 +37,17 @@ export default function Form(props) {
   const classes = useStyles();
 
   const [data, setData] = useState({ client: 0, sets: 0, reps: 0, description: '' });
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
 
   async function onSubmit(e) {
     e.preventDefault();
 
-    // TODO: Baeta vid image1 og image2.
-    const created = await addExercise(data.client, data.sets, data.reps, data.description);
+    const created = await addExercise(data.client, data.sets, data.reps, data.description, props.image1, props.image2);
 
     if (!created.ok) {
-      setErrors(created.result);
+      // setErrors(created.result);
       console.log('Villa við að bæta við æfingu.');
+      console.log('Villa: ' + created.result);
     } else {
       setData({ client: 0, sets: 0, reps: 0, description: '' });
       console.log('Æfingu var bætt við.');
@@ -58,6 +58,16 @@ export default function Form(props) {
     const newData = Object.assign({}, data);
     newData[e.target.name] = e.target.value;
     setData(newData);
+  }
+
+  function toggleFirstCamera(e) {
+    e.preventDefault();
+    props.toggleFirstCam();
+  }
+
+  function toggleSecondCamera(e){
+    e.preventDefault();
+    props.toggleSecondCam();
   }
 
   return (
@@ -115,7 +125,7 @@ export default function Form(props) {
               />
             </div>
             {props.image1 === '' ? (
-              <Button onClick={props.toggleFirstCam}>First Image</Button>
+              <Button onClick={toggleFirstCamera}>First Image</Button>
             ) : (
               <Card className={classes.card}>
               <CardActionArea>
@@ -133,7 +143,7 @@ export default function Form(props) {
             </Card>
             )}
             {props.image2 === '' ? (
-              <Button onClick={props.toggleSecondCam}>Second Image</Button>
+              <Button onClick={toggleSecondCamera}>Second Image</Button>
             ) : (
               <Card className={classes.card}>
               <CardActionArea>

@@ -27,16 +27,15 @@ async function query(sqlQuery, values = []) {
   return result;
 }
 
-// Todo: Add image.
-async function insert(userId, setNumber, repsNumber, workoutDescription) {
+async function insert(userId, setNumber, repsNumber, workoutDescription, image1, image2) {
   const q = `
     INSERT INTO program
-      (userId, setNumber, repsNumber, workoutDescription)
+      (userId, setNumber, repsNumber, workoutDescription, image1, image2)
     VALUES
-      ($1, $2, $3, $4)
+      ($1, $2, $3, $4, $5, $6)
     RETURNING *`;
 
-  return query(q, [ userId, setNumber, repsNumber, workoutDescription ]);
+  return query(q, [ userId, setNumber, repsNumber, workoutDescription, image1, image2 ]);
 }
 
 async function select() {

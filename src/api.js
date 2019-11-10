@@ -29,22 +29,23 @@ export async function deleteExercise(id) {
  * @param {*} repsNumber
  * @param {*} workoutDescription
  */
-export async function addExercise(userId, setNumber, repsNumber, workoutDescription) {
-  const options = {
+export async function addExercise(userId, setNumber, repsNumber, workoutDescription, image1, image2) {
+  const url = new URL(`/program`, apiUrl);
+  const response = await fetch(url.href, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       userId,
       setNumber,
       repsNumber,
       workoutDescription,
-    }),
-    headers: {
-      'content-type': 'application/json',
-    },
-    method: 'POST',
-  };
-
-  const url = new URL('/program', apiUrl);
-  const response = await fetch(url.href, options);
+      image1,
+      image2
+    })
+  });
 
   const result = await response.json();
 
