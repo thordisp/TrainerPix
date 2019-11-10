@@ -1,5 +1,5 @@
 import React from 'react';
-import {  NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import logo from '../../TrainerPixLogo4.png';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -9,7 +9,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-// import User from '../user/User';
+import User from '../user/User';
 
 const theme = createMuiTheme({
   palette: {
@@ -60,6 +60,7 @@ export default function Home() {
             <NavLink exact to="/program">
               <Button color="secondary">Nýtt Prógram</Button>
             </NavLink>
+            <User />
           </Toolbar>
         </AppBar>
       </ThemeProvider>

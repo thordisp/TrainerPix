@@ -4,11 +4,9 @@ const express = require('express');
 
 const requireEnv = require('./utils/requireEnv');
 
-// requireEnv(['DATABASE_URL', 'CLOUDINARY_URL', 'JWT_SECRET']);
+requireEnv(['DATABASE_URL', 'JWT_SECRET']);
 
-requireEnv(['DATABASE_URL']);
-
-// const auth = require('./authentication/auth');
+const auth = require('./authentication/auth');
 const api = require('./api');
 const cors = require('./utils/cors');
 
@@ -23,7 +21,7 @@ app.use(express.json());
 // CORS til að geta gert ajax beiðnir frá öðrum serverum
 app.use(cors);
 
-// app.use(auth);
+app.use(auth);
 app.use('/', api);
 
 function notFoundHandler(req, res, next) { // eslint-disable-line

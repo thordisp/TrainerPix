@@ -45,11 +45,11 @@ VALUES
 (2, 3, 12, 'Exercise 5. Testing database function');
 
 INSERT INTO users
-(username, password, name, email, admin)
+(id, username, email, password, admin)
 VALUES
-('trainer', '$2a$11$pgj3.zySyFOvIQEpD7W6Aund1Tw.BFarXxgLJxLbrzIv/4Nteisii', 'Jón', 'jon@example.org', true);
+(20, 'trainer', 'jon@example.org', '$2b$10$yDrcKXiKnZy1jY4eCO0gxeTPT/fx1Fz4T5GjCLcifSs52sOFjZmm2', true);
 
 INSERT INTO users
-(username, password, name, email, admin)
+(id, username, email, password, admin)
 VALUES
-('client', '$2a$11$pgj3.zySyFOvIQEpD7W6Aund1Tw.BFarXxgLJxLbrzIv/4Nteisii', 'Sigga', 'sigga@example.org', false);
+(21, 'client', 'sigga@example.org', '$2b$10$sCDmLYdNB5GgiMV/g6Zge.K2lTvo4xZvmjaaBSFyNax4Dgy0gTP.e', false);

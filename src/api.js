@@ -69,3 +69,59 @@ export async function getProgram(id) {
     result: item,
   };
 }
+
+/**
+ * Innskráning notanda
+ * @param {*} username
+ * @param {*} password
+ */
+export async function loginUser(username, password) {
+  const url = new URL(`/users/login`, apiUrl);
+  const response = await fetch(url.href, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    })
+  });
+
+  const result = await response.json();
+
+  return {
+    ok: response.ok,
+    data: result,
+  };
+}
+
+/**
+ * Nýskráning notanda
+ * @param {*} username
+ * @param {*} password
+ * @param {*} email
+ */
+export async function registerUser(username, password, email) {
+  const url = new URL(`/users/register`, apiUrl);
+  const response = await fetch(url.href, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      password,
+      email,
+    })
+  });
+
+  const result = await response.json();
+
+  return {
+    ok: response.ok,
+    data: result,
+  };
+}

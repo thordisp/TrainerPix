@@ -4,18 +4,18 @@ CREATE TABLE program (
   setNumber int,
   repsNumber int,
   workoutDescription TEXT NOT NULL,
-  image VARCHAR(256) DEFAULT NULL,
+  image1 VARCHAR DEFAULT NULL,
+  image2 VARCHAR DEFAULT NULL,
   created timestamp with time zone not null default current_timestamp,
   updated timestamp with time zone not null default current_timestamp
 );
 
 CREATE TABLE users (
-  id serial primary key,
-  username character varying(255) UNIQUE NOT NULL,
-  password character varying(255) NOT NULL,
-  name varchar(128) not null,
-  email varchar(256) not null,
-  admin boolean default false,
-  created timestamp with time zone not null default current_timestamp,
-  updated timestamp with time zone not null default current_timestamp
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(256) NOT NULL UNIQUE,
+  email VARCHAR(256) NOT NULL UNIQUE,
+  password VARCHAR(128) NOT NULL,
+  admin BOOLEAN DEFAULT false,
+  created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp,
+  updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp
 );

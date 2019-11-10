@@ -7,8 +7,8 @@ import Header from './components/header/Header';
 import Home from './routes/home/Home';
 import About from './routes/about/About';
 import NewProgram from './routes/newProgram/NewProgram';
-// import Register from './routes/register/Register';
-// import Login from './routes/login/Login';
+import Register from './routes/register/Register';
+import Login from './routes/login/Login';
 
 import NotFound from './routes/system-pages/NotFound';
 
@@ -32,8 +32,8 @@ function App(props: Props) {
             <Route path="/" exact component={Home} />
             <Route path="/about" exact component={About} />
             <Route path="/program" exact component={NewProgram} />
-            {/* <Route path="/register" exact component={Register} /> */}
-            {/* <Route path="/login" exact component={Login} /> */}
+            <Route path="/register" exact component={Register} />
+            <Route path="/login" exact component={Login} />
             <Route component={NotFound} />
           </Switch>
         </main>
