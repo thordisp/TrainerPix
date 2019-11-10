@@ -12,10 +12,13 @@ import Button from '../button/Button';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'center',
   },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    alignItems: 'center',
   },
   textField: {
     marginLeft: theme.spacing(1),
