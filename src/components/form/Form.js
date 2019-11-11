@@ -33,6 +33,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+let exerciseId = 0;
+
 export default function Form(props) {
   const classes = useStyles();
 
@@ -49,6 +51,8 @@ export default function Form(props) {
       console.log('Villa við að bæta við æfingu.');
       console.log('Villa: ' + created.result);
     } else {
+      exerciseId++;
+      props.updateProgram(exerciseId, data.sets, data.reps, data.description, props.image1, props.image2 );
       setData({ client: 0, sets: 0, reps: 0, description: '' });
       console.log('Æfingu var bætt við.');
     }
