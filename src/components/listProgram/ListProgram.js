@@ -60,8 +60,8 @@ export default function ListProgram(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {program.map(element => (
-              <StyledTableRow key={element.id}>
+            {program.map((element, index) => (
+              <StyledTableRow key={index}>
                 <StyledTableCell align="left">{element.sets}</StyledTableCell>
                 <StyledTableCell align="left">{element.reps}</StyledTableCell>
                 <StyledTableCell align="left">{element.description}</StyledTableCell>

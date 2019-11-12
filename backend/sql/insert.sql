@@ -53,3 +53,8 @@ INSERT INTO users
 (id, username, email, password, admin)
 VALUES
 (21, 'client', 'sigga@example.org', '$2b$10$sCDmLYdNB5GgiMV/g6Zge.K2lTvo4xZvmjaaBSFyNax4Dgy0gTP.e', false);
+
+INSERT INTO users
+(id, username, email, password, admin)
+VALUES
+(22, 'Tester', 'tester@testing.com', '$2b$10$K6lDyDrX1oO/bEXULliveeAh88uu/7nqHLUCApXXVWAlt8AwUxg4q', true);

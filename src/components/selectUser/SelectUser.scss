@@ -1,0 +1,11 @@
+@import '../../config.scss';
+
+.SelectContainer {
+  display: flex;
+  justify-content: center;
+  margin: $gutter;
+}
+
+h3 {
+  color: #455a64;
+}

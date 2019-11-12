@@ -2,6 +2,7 @@ const { query, deleteRow, insert } = require('../utils/db');
 
 const { isInt} = require('../utils/validation');
 
+
 // Saekir program fyrir user eftir userId.
 async function getProgram(id) {
 

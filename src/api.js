@@ -62,12 +62,26 @@ export async function addExercise(userId, setNumber, repsNumber, workoutDescript
 export async function getProgram(id) {
 
   const url = new URL(`/program/${id}`, apiUrl);
-  const res = await fetch(url.href);
-  const item = await res.json();
+  const response = await fetch(url.href);
+  const item = await response.json();
 
   return {
-    ok: res.ok,
+    ok: response.ok,
     result: item,
+  };
+}
+
+/**
+ * Skilar lista af notendum
+ */
+export async function listUsers() {
+  const url = new URL(`/users`, apiUrl);
+  const response = await fetch(url.href);
+  const result = await response.json();
+
+  return {
+    ok: response.ok,
+    data: result,
   };
 }
 

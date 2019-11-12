@@ -24,8 +24,6 @@ export default function Register() {
     try {
       const result = await registerUser(username, password, email);
 
-      console.log('register result: ' + result.data.errors);
-
       if (!result.ok) {
         setError(result.data.errors);
       } else {

@@ -38,13 +38,13 @@ let exerciseId = 0;
 export default function Form(props) {
   const classes = useStyles();
 
-  const [data, setData] = useState({ client: 0, sets: 0, reps: 0, description: '' });
+  const [data, setData] = useState({ sets: 0, reps: 0, description: '' });
   // const [errors, setErrors] = useState([]);
 
   async function onSubmit(e) {
     e.preventDefault();
 
-    const created = await addExercise(data.client, data.sets, data.reps, data.description, props.image1, props.image2);
+    const created = await addExercise(props.userId, data.sets, data.reps, data.description, props.image1, props.image2);
 
     if (!created.ok) {
       // setErrors(created.result);
@@ -52,8 +52,8 @@ export default function Form(props) {
       console.log('Villa: ' + created.result);
     } else {
       exerciseId++;
-      props.updateProgram(exerciseId, data.sets, data.reps, data.description, props.image1, props.image2 );
-      setData({ client: 0, sets: 0, reps: 0, description: '' });
+      props.updateProgram(props.userId, data.sets, data.reps, data.description, props.image1, props.image2 );
+      setData({ sets: 0, reps: 0, description: '' });
       console.log('Æfingu var bætt við.');
     }
   }
@@ -78,18 +78,6 @@ export default function Form(props) {
     <div className={classes.root}>
         <Container maxWidth="lg">
           <form className={classes.container} action="/program" method="post" onSubmit={onSubmit}>
-            <div>
-              <TextField
-                id="client"
-                className={classes.textField}
-                label="Client"
-                margin="normal"
-                variant="outlined"
-                type="text"
-                name="client"
-                onChange={onChange}
-              />
-            </div>
             <div>
             <TextField
                 id="sets"

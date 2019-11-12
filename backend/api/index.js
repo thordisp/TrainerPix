@@ -44,7 +44,7 @@ function indexRoute(req, res) {
 
 router.get('/', indexRoute);
 
-router.get('/users', requireAdmin, catchErrors(listUsers));
+router.get('/users', catchErrors(listUsers));
 router.get('/users/me', requireAuth, catchErrors(currentUser));
 router.patch('/users/me', requireAuth, catchErrors(updateCurrentUser));
 router.get('/users/:id', requireAdmin, catchErrors(listUser));

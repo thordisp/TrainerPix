@@ -6,28 +6,22 @@ const {
 
 const { query, pagedQuery } = require('../utils/db');
 const { isBoolean } = require('../utils/validation');
-const addPageMetadata = require('../utils/addPageMetadata');
 
 async function listUsers(req, res) {
-  const { offset = 0, limit = 10 } = req.query;
 
-  const users = await pagedQuery(
-    `SELECT
-      id, username, email, admin, created, updated
+  const q = `
+    SELECT
+      *
     FROM
-      users
-    ORDER BY updated DESC`,
-    [],
-    { offset, limit },
-  );
+      users`;
 
-  const usersWithPage = addPageMetadata(
-    users,
-    req.path,
-    { offset, limit, length: users.items.length },
-  );
+  const users = await query(q);
 
-  return res.json(usersWithPage);
+  if(!users) {
+    return res.status(404).json({ error: 'No users found' });
+  }
+
+  return res.json(users.rows);
 }
 
 async function listUser(req, res) {
