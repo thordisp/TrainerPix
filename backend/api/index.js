@@ -18,7 +18,7 @@ const {
 const {
   listProgram,
   addExercise,
-  deleteExercise,
+  deleteProgram,
 } = require('./program');
 
 const router = express.Router();
@@ -50,8 +50,9 @@ router.patch('/users/me', requireAuth, catchErrors(updateCurrentUser));
 router.get('/users/:id', requireAdmin, catchErrors(listUser));
 router.patch('/users/:id', requireAdmin, catchErrors(updateUser));
 
+// TODO: Bæta við require Auth
 router.get('/program/:id', catchErrors(listProgram));
 router.post('/program/', catchErrors(addExercise));
-router.delete('/program/:id', catchErrors(deleteExercise));
+router.delete('/program/:id', catchErrors(deleteProgram));
 
 module.exports = router;

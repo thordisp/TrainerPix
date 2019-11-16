@@ -44,7 +44,7 @@ export default function Form(props) {
   async function onSubmit(e) {
     e.preventDefault();
 
-    const created = await addExercise(props.userId, data.sets, data.reps, data.description, props.image1, props.image2);
+    const created = await addExercise(props.programId, data.sets, data.reps, data.description, props.image1, props.image2);
 
     if (!created.ok) {
       // setErrors(created.result);
@@ -52,7 +52,7 @@ export default function Form(props) {
       console.log('Villa: ' + created.result);
     } else {
       exerciseId++;
-      props.updateProgram(props.userId, data.sets, data.reps, data.description, props.image1, props.image2 );
+      props.updateProgram(props.programId, data.sets, data.reps, data.description, props.image1, props.image2 );
       setData({ sets: 0, reps: 0, description: '' });
       console.log('Æfingu var bætt við.');
     }

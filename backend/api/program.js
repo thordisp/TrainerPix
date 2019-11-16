@@ -1,4 +1,4 @@
-const { query, deleteRow, insert } = require('../utils/db');
+const { query } = require('../utils/db');
 
 const { isInt} = require('../utils/validation');
 
@@ -23,7 +23,7 @@ async function getProgram(id) {
   return program.rows;
 }
 
-// Birtir program fyrir user eftir userId.
+// Api: Birtir program fyrir user eftir userId.
 async function listProgram(req, res) {
   const { id } = req.params;
 
@@ -36,18 +36,36 @@ async function listProgram(req, res) {
   return res.json(program);
 }
 
-// Baetir vid aefingu i program.
-// TODO: Tharf ad ath hvernig nad er i userId.
-async function addExercise(req, res, next) {
-  const { userId, setNumber, repsNumber, workoutDescription, image1, image2 } = req.body;
+async function insertExercise(programId, setNumber, repsNumber, workoutDescription, image1, image2) {
+  const q = `
+    INSERT INTO exercise
+      (programId, setNumber, repsNumber, workoutDescription, image1, image2)
+    VALUES
+      ($1, $2, $3, $4, $5, $6)
+    RETURNING *`;
 
-  const q = await insert( userId, setNumber, repsNumber, workoutDescription, image1, image2 );
+  return query(q, [ programId, setNumber, repsNumber, workoutDescription, image1, image2 ]);
+}
+
+// Api: Baetir vid aefingu i program.
+// TODO: Tharf ad ath hvernig nad er i programId.
+async function addExercise(req, res, next) {
+  const { programId, setNumber, repsNumber, workoutDescription, image1, image2 } = req.body;
+
+  const q = await insertExercise( programId, setNumber, repsNumber, workoutDescription, image1, image2 );
 
   return res.status(201).json(q.rows[0]);
 }
 
-// Eydir aefingu ur programmi eftir id.
-async function deleteExercise(req, res) {
+// Eyðir prógrammi eftir id.
+async function deleteRow(id) {
+  const q = 'DELETE FROM program WHERE id = $1';
+
+  return query(q, [id]);
+}
+
+// Api: Eyðir prógrammi.
+async function deleteProgram(req, res) {
   const { id } = req.params;
 
   await deleteRow(id);
@@ -59,5 +77,5 @@ async function deleteExercise(req, res) {
 module.exports = {
   listProgram,
   addExercise,
-  deleteExercise,
+  deleteProgram,
 };

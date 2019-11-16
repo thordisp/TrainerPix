@@ -12,6 +12,7 @@ class NewProgram extends React.Component {
 
     this.updateUsers = this.updateUsers.bind(this);
     this.updateProgram = this.updateProgram.bind(this);
+    this.updateProgramId = this.updateProgramId.bind(this);
     this.updateUserId = this.updateUserId.bind(this);
     this.updateFirstImage = this.updateFirstImage.bind(this);
     this.updateSecondImage = this.updateSecondImage.bind(this);
@@ -21,6 +22,7 @@ class NewProgram extends React.Component {
     this.state = {
       users: [],
       program: [],
+      programId: 0,
       userId: 0,
       image1: '',
       image2: '',
@@ -45,6 +47,10 @@ class NewProgram extends React.Component {
         program,
       };
     });
+  }
+
+  updateProgramId(id) {
+    this.setState({ programId: id });
   }
 
   updateUserId(id) {
@@ -78,6 +84,7 @@ class NewProgram extends React.Component {
         <Form
           program={this.state.program}
           updateProgram={this.updateProgram}
+          programId={this.state.programId}
           userId={this.state.userId}
           image1={this.state.image1}
           image2={this.state.image2}
