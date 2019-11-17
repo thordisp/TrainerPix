@@ -2,8 +2,28 @@ const { query } = require('../utils/db');
 
 const { isInt} = require('../utils/validation');
 
+// DB: Býr til nýtt prógram.
+async function insertProgram(userId, clientId, link) {
+  const q = `
+  INSERT INTO program
+    (userId, clientId, link)
+  VALUES
+    ($1, $2, $3)
+  RETURNING *`;
 
-// Saekir program fyrir user eftir userId.
+  return query(q, [ userId, clientId, link ]);
+}
+
+// Býr til nýtt prógram.
+async function addProgram(req, res) {
+  const { userId, clientId, link } = req.body;
+
+  const q = await insertProgram( userId, clientId, link );
+
+  return res.status(201).json(q.rows[0]);
+}
+
+// DB: Saekir program fyrir user eftir userId.
 async function getProgram(id) {
 
   if (!isInt(id)) {
@@ -23,7 +43,7 @@ async function getProgram(id) {
   return program.rows;
 }
 
-// Api: Birtir program fyrir user eftir userId.
+// Birtir program fyrir user eftir userId.
 async function listProgram(req, res) {
   const { id } = req.params;
 
@@ -36,6 +56,7 @@ async function listProgram(req, res) {
   return res.json(program);
 }
 
+// DB: Býr til nýja æfingu og tengir við program.
 async function insertExercise(programId, setNumber, repsNumber, workoutDescription, image1, image2) {
   const q = `
     INSERT INTO exercise
@@ -47,7 +68,7 @@ async function insertExercise(programId, setNumber, repsNumber, workoutDescripti
   return query(q, [ programId, setNumber, repsNumber, workoutDescription, image1, image2 ]);
 }
 
-// Api: Baetir vid aefingu i program.
+// Baetir vid aefingu i program.
 // TODO: Tharf ad ath hvernig nad er i programId.
 async function addExercise(req, res, next) {
   const { programId, setNumber, repsNumber, workoutDescription, image1, image2 } = req.body;
@@ -57,14 +78,14 @@ async function addExercise(req, res, next) {
   return res.status(201).json(q.rows[0]);
 }
 
-// Eyðir prógrammi eftir id.
+// DB: Eyðir prógrammi eftir id.
 async function deleteRow(id) {
   const q = 'DELETE FROM program WHERE id = $1';
 
   return query(q, [id]);
 }
 
-// Api: Eyðir prógrammi.
+// Eyðir prógrammi eftir id.
 async function deleteProgram(req, res) {
   const { id } = req.params;
 
@@ -75,6 +96,7 @@ async function deleteProgram(req, res) {
 
 
 module.exports = {
+  addProgram,
   listProgram,
   addExercise,
   deleteProgram,

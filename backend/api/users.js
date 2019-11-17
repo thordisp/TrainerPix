@@ -4,24 +4,25 @@ const {
   findById,
 } = require('../authentication/users');
 
-const { query, pagedQuery } = require('../utils/db');
+const { query } = require('../utils/db');
 const { isBoolean } = require('../utils/validation');
 
-async function listUsers(req, res) {
+// Returns all clients.
+async function listClients(req, res) {
 
   const q = `
     SELECT
       *
     FROM
-      users`;
+      clients`;
 
-  const users = await query(q);
+  const clients = await query(q);
 
-  if(!users) {
-    return res.status(404).json({ error: 'No users found' });
+  if(!clients) {
+    return res.status(404).json({ error: 'No clients found' });
   }
 
-  return res.json(users.rows);
+  return res.json(clients.rows);
 }
 
 async function listUser(req, res) {
@@ -113,7 +114,7 @@ async function updateCurrentUser(req, res) {
 }
 
 module.exports = {
-  listUsers,
+  listClients,
   listUser,
   updateUser: updateUserRoute,
   currentUser: currentUserRoute,

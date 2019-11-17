@@ -7,6 +7,7 @@ import Header from './components/header/Header';
 import Home from './routes/home/Home';
 import About from './routes/about/About';
 import NewProgram from './routes/newProgram/NewProgram';
+import NewExercise from './routes/newExercise/NewExercise';
 import Register from './routes/register/Register';
 import Login from './routes/login/Login';
 
@@ -32,6 +33,7 @@ function App(props: Props) {
             <Route path="/" exact component={Home} />
             <Route path="/about" exact component={About} />
             <Route path="/program" exact component={NewProgram} />
+            <Route path="/program/:programId/add" exact component={NewExercise} />
             <Route path="/register" exact component={Register} />
             <Route path="/login" exact component={Login} />
             <Route component={NotFound} />

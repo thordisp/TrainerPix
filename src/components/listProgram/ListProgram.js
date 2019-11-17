@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ListProgram(props) {
 
-  let program = props.program;
+  let exercise = props.exercise;
 
   const classes = useStyles();
 
@@ -60,7 +60,7 @@ export default function ListProgram(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {program.map((element, index) => (
+            {exercise.map((element, index) => (
               <StyledTableRow key={index}>
                 <StyledTableCell align="left">{element.sets}</StyledTableCell>
                 <StyledTableCell align="left">{element.reps}</StyledTableCell>

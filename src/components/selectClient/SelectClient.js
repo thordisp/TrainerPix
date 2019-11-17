@@ -6,8 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import { listUsers } from '../../api';
-import './SelectUser.scss';
+import { listClients } from '../../api';
+import './SelectClient.scss';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,18 +25,18 @@ const useStyles = makeStyles(theme => ({
 
 export default function SimpleSelect(props) {
   const classes = useStyles();
-  const [user, setUser] = useState('');
+  const [clients, setClients] = useState('');
 
   function handleChange(event) {
-    setUser(event.target.value);
-    props.updateUserId(event.target.value);
+    setClients(event.target.value);
+    props.updateClientId(event.target.value);
   }
 
   useEffect(() => {
     async function fetchData() {
-      const result = await listUsers();
+      const result = await listClients();
       for(let i = 0; i < result.data.length; i++) {
-        props.updateUsers(result.data[i].id, result.data[i].username);
+        props.updateClients(result.data[i].id, result.data[i].name);
       }
     }
     fetchData();
@@ -49,11 +49,11 @@ export default function SimpleSelect(props) {
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="select-simple">Skjólstæðingur</InputLabel>
           <Select
-            value={user}
+            value={clients}
             onChange={handleChange}
             input={<Input id="select-simple" />}
           >
-            {props.users.map((user, index) =>
+            {props.clients.map((user, index) =>
               <MenuItem key={index} value={user.id}>
                 {user.username}
               </MenuItem>

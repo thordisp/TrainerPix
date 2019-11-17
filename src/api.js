@@ -1,6 +1,85 @@
 import 'isomorphic-fetch';
+import { async } from 'q';
 
 const { apiUrl } = require('./config');
+
+/**
+ * Býr til nýtt prógram.
+ * @param {*} userId
+ * @param {*} clientId
+ * @param {*} link
+ */
+export async function addProgram(userId, clientId, link) {
+  const url = new URL(`/program`, apiUrl);
+  const response = await fetch(url.href, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId,
+      clientId,
+      link
+    })
+  });
+
+  const result = await response.json();
+
+  return {
+    ok: response.ok,
+    result,
+  };
+}
+
+/**
+ * Skilar prógrammi fyrir valinn notanda.
+ * @param {*} id userId
+ */
+export async function getProgram(clientId) {
+
+  const url = new URL(`/program/${clientId}`, apiUrl);
+  const response = await fetch(url.href);
+  const item = await response.json();
+
+  return {
+    ok: response.ok,
+    result: item,
+  };
+}
+
+/**
+ * Baetir nyrri aefingu vid program.
+ * @param {*} userId
+ * @param {*} setNumber
+ * @param {*} repsNumber
+ * @param {*} workoutDescription
+ */
+export async function addExercise(programId, setNumber, repsNumber, workoutDescription, image1, image2) {
+  const url = new URL(`/program/${programId}/add`, apiUrl);
+  const response = await fetch(url.href, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      programId,
+      setNumber,
+      repsNumber,
+      workoutDescription,
+      image1,
+      image2
+    })
+  });
+
+  const result = await response.json();
+
+  return {
+    ok: response.ok,
+    result,
+  };
+}
 
 /**
  * Eyðir æfingu eftir id.
@@ -23,58 +102,9 @@ export async function deleteExercise(id) {
 }
 
 /**
- * Baetir nyrri aefingu vid program.
- * @param {*} userId
- * @param {*} setNumber
- * @param {*} repsNumber
- * @param {*} workoutDescription
- */
-export async function addExercise(userId, setNumber, repsNumber, workoutDescription, image1, image2) {
-  const url = new URL(`/program`, apiUrl);
-  const response = await fetch(url.href, {
-    method: "POST",
-    mode: "cors",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      userId,
-      setNumber,
-      repsNumber,
-      workoutDescription,
-      image1,
-      image2
-    })
-  });
-
-  const result = await response.json();
-
-  return {
-    ok: response.ok,
-    result,
-  };
-}
-
-/**
- * Skilar prógrammi fyrir valinn notanda.
- * @param {*} id userId
- */
-export async function getProgram(id) {
-
-  const url = new URL(`/program/${id}`, apiUrl);
-  const response = await fetch(url.href);
-  const item = await response.json();
-
-  return {
-    ok: response.ok,
-    result: item,
-  };
-}
-
-/**
  * Skilar lista af notendum
  */
-export async function listUsers() {
+export async function listClients() {
   const url = new URL(`/users`, apiUrl);
   const response = await fetch(url.href);
   const result = await response.json();

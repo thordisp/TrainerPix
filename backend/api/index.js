@@ -8,7 +8,7 @@ const requireAdmin = [
 ];
 
 const {
-  listUsers,
+  listClients,
   listUser,
   updateUser,
   currentUser,
@@ -16,6 +16,7 @@ const {
 } = require('./users');
 
 const {
+  addProgram,
   listProgram,
   addExercise,
   deleteProgram,
@@ -36,15 +37,18 @@ function indexRoute(req, res) {
       me: '/users/me',
     },
     program: {
+      newProgram: '/program',
       program: '/program/{id}',
-      exercise: '/program/',
     },
+    exercise: {
+      exercise: '/program/{id}/add'
+    }
   });
 }
 
 router.get('/', indexRoute);
 
-router.get('/users', catchErrors(listUsers));
+router.get('/users', catchErrors(listClients));
 router.get('/users/me', requireAuth, catchErrors(currentUser));
 router.patch('/users/me', requireAuth, catchErrors(updateCurrentUser));
 router.get('/users/:id', requireAdmin, catchErrors(listUser));
@@ -52,7 +56,8 @@ router.patch('/users/:id', requireAdmin, catchErrors(updateUser));
 
 // TODO: Bæta við require Auth
 router.get('/program/:id', catchErrors(listProgram));
-router.post('/program/', catchErrors(addExercise));
+router.post('/program', catchErrors(addProgram));
+router.post('/program/:id/add', catchErrors(addExercise));
 router.delete('/program/:id', catchErrors(deleteProgram));
 
 module.exports = router;
