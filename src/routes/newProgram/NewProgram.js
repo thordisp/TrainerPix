@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectClient from '../../components/selectClient/SelectClient';
+import ProgramForm from '../../components/programForm/ProgramForm';
 
 import './NewProgram.scss';
 
@@ -34,7 +34,7 @@ class NewProgram extends React.Component {
   render() {
     return (
       <div className="form-container">
-        <SelectClient
+        <ProgramForm
           clients = {this.state.clients}
           updateClients={this.updateClients}
           updateClientId={this.updateClientId}

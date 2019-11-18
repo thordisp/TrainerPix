@@ -22,6 +22,7 @@ CREATE TABlE program (
   id serial PRIMARY KEY,
   userId int,
   clientId int,
+  name VARCHAR(256),
   link VARCHAR,
   created timestamp with time zone not null default current_timestamp,
   updated timestamp with time zone not null default current_timestamp,

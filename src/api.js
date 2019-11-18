@@ -9,7 +9,7 @@ const { apiUrl } = require('./config');
  * @param {*} clientId
  * @param {*} link
  */
-export async function addProgram(userId, clientId, link) {
+export async function addProgram(userId, clientId, name, link) {
   const url = new URL(`/program`, apiUrl);
   const response = await fetch(url.href, {
     method: "POST",
@@ -20,6 +20,7 @@ export async function addProgram(userId, clientId, link) {
     body: JSON.stringify({
       userId,
       clientId,
+      name,
       link
     })
   });

@@ -14,57 +14,57 @@ VALUES
 (21, 'Tester', 'tester@testing.com');
 
 INSERT INTO program
-(id, userId, clientId)
+(id, userId, clientId, name)
 VALUES
-(1, 1, 20);
+(20, 1, 20, 'Testing Program 1');
 
 INSERT INTO program
-(id, userId, clientId)
+(id, userId, clientId, name)
 VALUES
-(2, 1, 21);
+(21, 1, 21, 'Testing Program 2');
 
 INSERT INTO exercise
 (programId, setNumber, repsNumber, workoutDescription)
 VALUES
-(1, 3, 12, 'Exercise 1. This is one hell of a description');
+(20, 3, 12, 'Exercise 1. This is one hell of a description');
 
 INSERT INTO exercise
 (programId, setNumber, repsNumber, workoutDescription)
 VALUES
-(1, 3, 12, 'Exercise 2. This is one hell of a description');
+(20, 3, 12, 'Exercise 2. This is one hell of a description');
 
 INSERT INTO exercise
 (programId, setNumber, repsNumber, workoutDescription)
 VALUES
-(1, 3, 12, 'Exercise 3. This is one hell of a description');
+(20, 3, 12, 'Exercise 3. This is one hell of a description');
 
 INSERT INTO exercise
 (programId, setNumber, repsNumber, workoutDescription)
 
 VALUES
-(1, 3, 12, 'Exercise 4. This is one hell of a description');
+(20, 3, 12, 'Exercise 4. This is one hell of a description');
 
 INSERT INTO exercise
 (programId, setNumber, repsNumber, workoutDescription)
 VALUES
-(2, 3, 12, 'Exercise 1. Testing database function');
+(21, 3, 12, 'Exercise 1. Testing database function');
 
 INSERT INTO exercise
 (programId, setNumber, repsNumber, workoutDescription)
 VALUES
-(2, 3, 12, 'Exercise 2. Testing database function');
+(21, 3, 12, 'Exercise 2. Testing database function');
 
 INSERT INTO exercise
 (programId, setNumber, repsNumber, workoutDescription)
 VALUES
-(2, 3, 12, 'Exercise 3. Testing database function');
+(21, 3, 12, 'Exercise 3. Testing database function');
 
 INSERT INTO exercise
 (programId, setNumber, repsNumber, workoutDescription)
 VALUES
-(2, 3, 12, 'Exercise 4. Testing database function');
+(21, 3, 12, 'Exercise 4. Testing database function');
 
 INSERT INTO exercise
 (programId, setNumber, repsNumber, workoutDescription)
 VALUES
-(2, 3, 12, 'Exercise 5. Testing database function');
+(21, 3, 12, 'Exercise 5. Testing database function');

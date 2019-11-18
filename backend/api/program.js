@@ -3,22 +3,22 @@ const { query } = require('../utils/db');
 const { isInt} = require('../utils/validation');
 
 // DB: Býr til nýtt prógram.
-async function insertProgram(userId, clientId, link) {
+async function insertProgram(userId, clientId, name, link) {
   const q = `
   INSERT INTO program
-    (userId, clientId, link)
+    (userId, clientId, name, link)
   VALUES
-    ($1, $2, $3)
+    ($1, $2, $3, $4)
   RETURNING *`;
 
-  return query(q, [ userId, clientId, link ]);
+  return query(q, [ userId, clientId, name, link ]);
 }
 
 // Býr til nýtt prógram.
 async function addProgram(req, res) {
-  const { userId, clientId, link } = req.body;
+  const { userId, clientId, name, link } = req.body;
 
-  const q = await insertProgram( userId, clientId, link );
+  const q = await insertProgram( userId, clientId, name, link );
 
   return res.status(201).json(q.rows[0]);
 }

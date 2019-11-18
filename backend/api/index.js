@@ -57,7 +57,7 @@ router.patch('/users/:id', requireAdmin, catchErrors(updateUser));
 // TODO: Bæta við require Auth
 router.get('/program/:id', catchErrors(listProgram));
 router.post('/program', catchErrors(addProgram));
-router.post('/program/:id/add', catchErrors(addExercise));
+router.post('/program/:programId/add', catchErrors(addExercise));
 router.delete('/program/:id', catchErrors(deleteProgram));
 
 module.exports = router;
