@@ -1,5 +1,4 @@
 import 'isomorphic-fetch';
-import { async } from 'q';
 
 const { apiUrl } = require('./config');
 

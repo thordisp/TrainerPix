@@ -11,8 +11,7 @@ import Button from '../button/Button';
 
 import { addProgram } from '../../api';
 import { listClients } from '../../api';
-import './SelectClient.scss';
-import { link } from 'fs';
+import './ProgramForm.scss';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -101,6 +100,7 @@ export default function SimpleSelect(props) {
       }
     }
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   return (
