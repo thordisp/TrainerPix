@@ -33,7 +33,8 @@ function App(props: Props) {
             <Route path="/" exact component={Home} />
             <Route path="/about" exact component={About} />
             <Route path="/program" exact component={NewProgram} />
-            <Route path="/program/:programId/add" exact component={NewExercise} />
+            <Route path="/program/:programId/add/:clientId" exact component={NewExercise} />
+            <Route path="/program/:clientId/view" exact component={ViewProgram} />
             <Route path="/register" exact component={Register} />
             <Route path="/login" exact component={Login} />
             <Route component={NotFound} />

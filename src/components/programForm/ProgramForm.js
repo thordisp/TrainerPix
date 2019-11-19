@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
@@ -43,7 +43,7 @@ export default function SimpleSelect(props) {
   const [data, setData] = useState({ name: '' });
   const [clients, setClients] = useState(0);
 
-  let history = useHistory()
+  let history = useHistory();
 
   /**
    * Creates a new program with name, clientId and link.
@@ -57,11 +57,8 @@ export default function SimpleSelect(props) {
     const user = JSON.parse(localStorage.getItem('user'));
     console.log('user: ' + user.user.id);
 
-    // Create a random number for link.
-    const linkNumber = Math.floor((Math.random() * 9999) + 1000);
-
     // Create a link to where the exercises are added to program.
-    const programLink = `/program/${clients}/view/${linkNumber}`;
+    const programLink = `/program/${clients}/view`;
 
     const created = await addProgram(user.user.id, clients, data.name, programLink);
 
@@ -75,7 +72,7 @@ export default function SimpleSelect(props) {
     // get programId from results.
     const programId = created.result.id;
 
-    history.push(`/program/${programId}/add`);
+    history.push(`/program/${programId}/add/${clients}`);
   }
 
   // Set the value of program name.

@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
 // import { PDFDownloadLink } from "@react-pdf/renderer";
 // import { PdfDocument } from "./Movie";
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -8,8 +9,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '../button/Button';
 
 import './ListProgram.scss';
+
+import { newPin } from '../../api';
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -42,9 +46,29 @@ const useStyles = makeStyles(theme => ({
 
 export default function ListProgram(props) {
 
+  let history = useHistory();
+
   let exercise = props.exercise;
 
   const classes = useStyles();
+
+  async function onClick (e) {
+    e.preventDefault();
+
+    // Create a random number for link.
+    const generatePin = Math.floor(1000 + (9999 - 1000) * Math.random());
+
+    const create = await newPin(generatePin, props.clientId);
+
+    if(!create.ok) {
+      console.log('Villa vid ad uppfaera pin');
+    } else (
+      console.log('Pin uppfaert.')
+    );
+
+    // Redirect a "/program/:clientID/view"
+      history.push(`/program/${props.clientId}/view`);
+  }
 
   return (
     <div className="listContainer">
@@ -72,6 +96,9 @@ export default function ListProgram(props) {
           </TableBody>
         </Table>
       </Paper>
+      <div>
+        <Button onClick={onClick}>Submit</Button>
+      </div>
     </div>
   );
 }

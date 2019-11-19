@@ -113,10 +113,37 @@ async function updateCurrentUser(req, res) {
   return res.status(200).json(result);
 }
 
+async function updateUserPin(pin, userId) {
+  const q = `
+    UPDATE
+      clients
+    SET
+      pin = $1
+    WHERE
+      id = $2
+    RETURNING
+      pin`;
+
+  return query(q, [ pin, userId ]);
+}
+
+// Uppfærir pin hjá notanda.
+async function newPin(req, res) {
+  const { pin } = req.body;
+  const { userId } = req.params;
+
+  const q = await updateUserPin( pin, userId );
+
+  return res.status(201).json(q.rows[0]);
+}
+
+
+
 module.exports = {
   listClients,
   listUser,
   updateUser: updateUserRoute,
   currentUser: currentUserRoute,
   updateCurrentUser,
+  newPin,
 };

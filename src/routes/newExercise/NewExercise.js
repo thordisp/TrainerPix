@@ -21,6 +21,7 @@ class NewExercise extends React.Component {
     this.state = {
       exercise: [],
       programId: params.programId,
+      clientId: params.clientId,
       image1: '',
       image2: '',
       firstWebcamEnabled: false,
@@ -81,6 +82,7 @@ class NewExercise extends React.Component {
         />
         <ListProgram
           exercise={this.state.exercise}
+          clientId={this.state.clientId}
         />
       </div>
     )

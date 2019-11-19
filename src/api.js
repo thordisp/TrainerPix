@@ -56,7 +56,7 @@ export async function getProgram(clientId) {
  * @param {*} workoutDescription
  */
 export async function addExercise(programId, setNumber, repsNumber, workoutDescription, image1, image2) {
-  const url = new URL(`/program/${programId}/add`, apiUrl);
+  const url = new URL(`/program/${programId}/add/`, apiUrl);
   const response = await fetch(url.href, {
     method: "POST",
     mode: "cors",
@@ -168,5 +168,28 @@ export async function registerUser(username, password, email) {
   return {
     ok: response.ok,
     data: result,
+  };
+}
+
+export async function newPin(pin, userId, programId) {
+  const url = new URL(`/program/${programId}/add/${userId}`, apiUrl);
+  const response = await fetch(url.href, {
+    method: "PATCH",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      pin,
+      userId,
+      programId,
+    })
+  });
+
+  const result = await response.json();
+
+  return {
+    ok: response.ok,
+    result,
   };
 }
