@@ -1,0 +1,7 @@
+@import '../../config.scss';
+
+.pin_container {
+  margin: $gutter;
+  display: flex;
+  justify-content: center;
+}

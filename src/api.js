@@ -38,13 +38,13 @@ export async function addProgram(userId, clientId, name, link) {
  */
 export async function getProgram(clientId) {
 
-  const url = new URL(`/program/${clientId}`, apiUrl);
+  const url = new URL(`/client/programs/${clientId}`, apiUrl);
   const response = await fetch(url.href);
-  const item = await response.json();
+  const result = await response.json();
 
   return {
     ok: response.ok,
-    result: item,
+    data: result,
   };
 }
 
@@ -78,6 +78,43 @@ export async function addExercise(programId, setNumber, repsNumber, workoutDescr
   return {
     ok: response.ok,
     result,
+  };
+}
+
+
+export async function getAccessToPrograms(pin) {
+  const url = new URL(`/client/programs`, apiUrl);
+  const response = await fetch(url.href, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      pin
+    })
+  });
+
+  const result = await response.json();
+
+  return {
+    ok: response.ok,
+    data: result,
+  };
+}
+
+/**
+ * Skilar æfingum fyrir valið prógram.
+ * @param {*} id userId
+ */
+export async function getExercises(userId, programId) {
+  const url = new URL(`/client/programs/${userId}/${programId}`, apiUrl);
+  const response = await fetch(url.href);
+  const result = await response.json();
+
+  return {
+    ok: response.ok,
+    data: result,
   };
 }
 

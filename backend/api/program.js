@@ -23,10 +23,10 @@ async function addProgram(req, res) {
   return res.status(201).json(q.rows[0]);
 }
 
-// DB: Saekir program fyrir user eftir userId.
-async function getProgram(id) {
+// DB: Saekir program fyrir client eftir clientId.
+async function getProgram(clientId) {
 
-  if (!isInt(id)) {
+  if (!isInt(clientId)) {
     return null;
   }
 
@@ -36,18 +36,18 @@ async function getProgram(id) {
     FROM
       program
     WHERE
-      userId = $1`;
+      clientId = $1`;
 
-  const program = await query(q, [id]);
+  const program = await query(q, [clientId]);
 
   return program.rows;
 }
 
-// Birtir program fyrir user eftir userId.
+// Birtir program fyrir client eftir clientId.
 async function listProgram(req, res) {
-  const { id } = req.params;
+  const { clientId } = req.params;
 
-  const program = await getProgram(id);
+  const program = await getProgram(clientId);
 
   if (!program) {
     return res.status(404).json({ error: 'Program not found', program: program });
@@ -78,6 +78,30 @@ async function addExercise(req, res, next) {
   return res.status(201).json(q.rows[0]);
 }
 
+async function getExercise(programId) {
+  const q = `
+  SELECT
+    *
+  FROM
+    exercise
+  WHERE
+    programId = $1`;
+
+  return query(q, [ programId ]);
+}
+
+async function listExercises(req, res, next) {
+  const { programId } = req.params;
+
+  const exercises = await getExercise( programId );
+
+  if (!exercises) {
+    return res.status(404).json({ error: 'No exercises found.' });
+  }
+
+  return res.json(exercises.rows);
+}
+
 // DB: Eyðir prógrammi eftir id.
 async function deleteRow(id) {
   const q = 'DELETE FROM program WHERE id = $1';
@@ -94,10 +118,57 @@ async function deleteProgram(req, res) {
   return res.status(204).json({});
 }
 
+// DB: Finnur client sem á pin númer.
+async function findClient(pin) {
+  const queryString = `
+    SELECT
+      *
+    FROM
+      clients
+    WHERE
+      pin = $1`;
+
+  const result = await query(queryString, [ pin ]);
+  if (result.rows) {
+    return result.rows[0];
+  }
+  return undefined;
+}
+
+// Skilar client og öllum æfingarprógömmum sem client á.
+async function clientProgram(req, res) {
+  const { pin } = req.body;
+
+  const client = await findClient(pin);
+
+  if(!client) {
+    return res.status(404).json({ error: 'Pin is incorrect!'});
+  } else {
+      const q = `
+      SELECT
+        *
+      FROM
+        program
+      WHERE
+        clientId = ${client.id}
+      `;
+
+      const program = await query(q);
+
+      if(!program) {
+        return res.status(404).json({ error: 'Client has no programs' });
+      }
+
+      return res.json({ client, programs: program.rows });
+  }
+}
+
 
 module.exports = {
   addProgram,
   listProgram,
   addExercise,
+  listExercises,
   deleteProgram,
+  clientProgram,
 };

@@ -13,13 +13,16 @@ const {
   updateUser,
   currentUser,
   updateCurrentUser,
+  newPin,
 } = require('./users');
 
 const {
   addProgram,
   listProgram,
   addExercise,
+  listExercises,
   deleteProgram,
+  clientProgram,
 } = require('./program');
 
 const router = express.Router();
@@ -39,7 +42,8 @@ function indexRoute(req, res) {
     },
     program: {
       newProgram: '/program',
-      program: '/program/{id}',
+      program: '/program/{id}/view',
+      exercises: '/program/{clientId}/view/{programId}',
     },
     exercise: {
       exercise: '/program/{id}/add',
@@ -56,10 +60,13 @@ router.get('/users/:id', requireAdmin, catchErrors(listUser));
 router.patch('/users/:id', requireAdmin, catchErrors(updateUser));
 
 // TODO: Bæta við require Auth
-router.get('/program/:id', catchErrors(listProgram));
 router.post('/program', catchErrors(addProgram));
 router.post('/program/:programId/add/', catchErrors(addExercise));
 router.patch('/program/:programId/add/:userId', catchErrors(newPin));
 router.delete('/program/:id', catchErrors(deleteProgram));
+
+router.post('/client/programs', catchErrors(clientProgram));
+router.get('/client/programs/:clientId', catchErrors(listProgram));
+router.get('/client/programs/:clientId/:programId', catchErrors(listExercises));
 
 module.exports = router;

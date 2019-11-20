@@ -8,6 +8,8 @@ import Home from './routes/home/Home';
 import About from './routes/about/About';
 import NewProgram from './routes/newProgram/NewProgram';
 import NewExercise from './routes/newExercise/NewExercise';
+import AccessProgram from './routes/accessProgram/AccessProgram';
+import ViewProgram from './routes/viewProgram/ViewProgram';
 import Register from './routes/register/Register';
 import Login from './routes/login/Login';
 
@@ -20,6 +22,7 @@ type Props = {
 };
 
 function App(props: Props) {
+
   return (
     <React.Fragment>
       <Helmet defaultTitle="TrainerPix" titleTemplate="%s – TrainerPix" />
@@ -34,7 +37,9 @@ function App(props: Props) {
             <Route path="/about" exact component={About} />
             <Route path="/program" exact component={NewProgram} />
             <Route path="/program/:programId/add/:clientId" exact component={NewExercise} />
-            <Route path="/program/:clientId/view" exact component={ViewProgram} />
+            <Route path="/client/programs" exact component={AccessProgram} />
+            <Route path="/client/programs/:clientId" exact component={AccessProgram} />
+            <Route path="/client/programs/:clientId/:programId" exact component={ViewProgram} />
             <Route path="/register" exact component={Register} />
             <Route path="/login" exact component={Login} />
             <Route component={NotFound} />

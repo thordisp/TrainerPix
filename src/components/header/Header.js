@@ -57,6 +57,9 @@ export default function Home() {
             <NavLink exact to="/about">
               <Button color="secondary">Um Okkur</Button>
             </NavLink>
+            <NavLink exact to="/client/programs">
+              <Button color="secondary">Skoða Æfingarprógram</Button>
+            </NavLink>
             <NavLink exact to="/program">
               <Button color="secondary">Nýtt Prógram</Button>
             </NavLink>
