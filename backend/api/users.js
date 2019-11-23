@@ -25,6 +25,30 @@ async function listClients(req, res) {
   return res.json(clients.rows);
 }
 
+async function getClient(clientId) {
+  const q = `
+  SELECT
+    *
+  FROM
+    clients
+  WHERE
+    id = $1`;
+
+  return query(q, [ clientId ]);
+}
+
+async function listClient(req, res, next) {
+  const { clientId } = req.params;
+
+  const client = await getClient( clientId );
+
+  if (!client) {
+    return res.status(404).json({ error: 'No client found.' });
+  }
+
+  return res.json(client.rows);
+}
+
 async function listUser(req, res) {
   const { id } = req.params;
 
@@ -145,5 +169,6 @@ module.exports = {
   updateUser: updateUserRoute,
   currentUser: currentUserRoute,
   updateCurrentUser,
+  listClient,
   newPin,
 };

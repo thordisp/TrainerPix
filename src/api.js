@@ -230,3 +230,14 @@ export async function newPin(pin, userId, programId) {
     result,
   };
 }
+
+export async function getClient(clientId) {
+  const url = new URL(`/success/${clientId}`, apiUrl);
+  const response = await fetch(url.href);
+  const result = await response.json();
+
+  return {
+    ok: response.ok,
+    data: result,
+  };
+}

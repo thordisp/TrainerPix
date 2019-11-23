@@ -37,7 +37,6 @@ export default function ListProgram(props) {
         {programs.map((element, index) =>
           <ListItem
             button
-            // selected={selectedProgram === index}
             onClick={event => handleListItemClick(event, element.programId)}
             key={index}
           >

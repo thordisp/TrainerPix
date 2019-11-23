@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 // import { PDFDownloadLink } from "@react-pdf/renderer";
 // import { PdfDocument } from "./Movie";
@@ -65,8 +65,8 @@ export default function ListProgram(props) {
       console.log('Pin uppfaert.')
     );
 
-    // Redirect a "/program/:clientID/view"
-      history.push(`/program/${props.clientId}/view`);
+    // Senda notanda áfram á "/program/:clientID/view", ásamt pin skjólstæðings.
+      history.push(`/success/${props.clientId}`);
   }
 
   return (

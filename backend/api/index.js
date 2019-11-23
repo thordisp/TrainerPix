@@ -13,6 +13,7 @@ const {
   updateUser,
   currentUser,
   updateCurrentUser,
+  listClient,
   newPin,
 } = require('./users');
 
@@ -68,5 +69,7 @@ router.delete('/program/:id', catchErrors(deleteProgram));
 router.post('/client/programs', catchErrors(clientProgram));
 router.get('/client/programs/:clientId', catchErrors(listProgram));
 router.get('/client/programs/:clientId/:programId', catchErrors(listExercises));
+
+router.get('/success/:clientId', catchErrors(listClient));
 
 module.exports = router;
