@@ -12,6 +12,7 @@ import AccessProgram from './routes/accessProgram/AccessProgram';
 import ViewProgram from './routes/viewProgram/ViewProgram';
 import Register from './routes/register/Register';
 import Login from './routes/login/Login';
+import Success from './routes/system-pages/Success';
 
 import NotFound from './routes/system-pages/NotFound';
 
@@ -42,6 +43,7 @@ function App(props: Props) {
             <Route path="/client/programs/:clientId/:programId" exact component={ViewProgram} />
             <Route path="/register" exact component={Register} />
             <Route path="/login" exact component={Login} />
+            <Route path="/success/:clientId" exact component={Success} />
             <Route component={NotFound} />
           </Switch>
         </main>

@@ -1,0 +1,14 @@
+@import '../../config.scss';
+
+.frontpage__container {
+  background-color: #002f6c;
+  height: 100vh;
+}
+
+.frontpage__links {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
