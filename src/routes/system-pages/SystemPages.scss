@@ -9,6 +9,9 @@
 
   &__col {
     @include columns(12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   &__heading {

@@ -7,11 +7,30 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Button from '../button/Button';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import Button from '@material-ui/core/Button';
 
 import { addProgram } from '../../api';
 import { listClients } from '../../api';
 import './ProgramForm.scss';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#4f83cc',
+      main: '#002f6c',
+      dark: '#01579b',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      light: '#eeffff',
+      main: '#bbdefb',
+      dark: '#8aacc8',
+      contrastText: '#000000',
+    },
+  },
+});
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -101,37 +120,39 @@ export default function SimpleSelect(props) {
   }, []);
 
   return (
-    <div className="SelectContainer">
-      <h1>Nýtt Æfingarprógram</h1>
-      <form className={classes.root} onSubmit={onSubmit} autoComplete="off">
-        <div>
-          <TextField
-            id="name"
-            name="name"
-            className={classes.textField}
-            label="Nafn Æfingarprógrams"
-            margin="normal"
-            onChange={onChange}
-          />
-        </div>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="select-simple">Skjólstæðingur</InputLabel>
-          <Select
-            value={clients}
-            onChange={handleChange}
-            input={<Input id="select-simple" />}
-          >
-            {props.clients.map((user, index) =>
-              <MenuItem key={index} value={user.id}>
-                {user.username}
-              </MenuItem>
-              )}
-          </Select>
-        </FormControl>
-        <div>
-          <Button>Submit</Button>
-        </div>
-      </form>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="SelectContainer">
+        <h1>Nýtt Æfingarprógram</h1>
+        <form className={classes.root} onSubmit={onSubmit} autoComplete="off">
+          <div>
+            <TextField
+              id="name"
+              name="name"
+              className={classes.textField}
+              label="Nafn Æfingarprógrams"
+              margin="normal"
+              onChange={onChange}
+            />
+          </div>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="select-simple">Skjólstæðingur</InputLabel>
+            <Select
+              value={clients}
+              onChange={handleChange}
+              input={<Input id="select-simple" />}
+            >
+              {props.clients.map((user, index) =>
+                <MenuItem key={index} value={user.id}>
+                  {user.username}
+                </MenuItem>
+                )}
+            </Select>
+          </FormControl>
+          <div className="buttonWrapper">
+            <Button color="primary" variant="contained">Submit</Button>
+          </div>
+        </form>
+      </div>
+    </ThemeProvider>
   );
 }

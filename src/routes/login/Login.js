@@ -1,18 +1,38 @@
 import React, { useState } from 'react';
-
+import { useHistory } from 'react-router-dom';
 import Input from '../../components/input/Input';
-import { Link } from 'react-router-dom';
-import Button from '../../components/button/Button';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import Button from '@material-ui/core/Button';
 
 import { Context } from '../../UserContext';
 
 import './Login.scss';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#4f83cc',
+      main: '#002f6c',
+      dark: '#01579b',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      light: '#eeffff',
+      main: '#bbdefb',
+      dark: '#8aacc8',
+      contrastText: '#000000',
+    },
+  },
+});
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');  // eslint-disable-next-line
   const [loading, setLoading] = useState(false); // eslint-disable-next-line
   const [error, setError] = useState(null);
+
+  let history = useHistory();
 
   const onSubmit = (loginUser) => async (e) => {
     e.preventDefault();
@@ -30,6 +50,10 @@ export default function Login() {
     setPassword(value);
   }
 
+  function onClick(e) {
+    history.push('/register');
+  }
+
   const hasError = (f) => Boolean(error && error.find((i) => i.field === f));
 
   const usernameInvalid = hasError('username');
@@ -39,6 +63,7 @@ export default function Login() {
     <Context.Consumer>
       {({ message, loginUser, fetching, authenticated }) => {
         return (
+          <ThemeProvider theme={theme}>
           <div className="login">
             <div className="login__row">
               <div className="login__col">
@@ -66,33 +91,34 @@ export default function Login() {
                 )}
 
                 {!authenticated && !fetching && (
-                  <form className="login__form" onSubmit={onSubmit(loginUser)}>
-                    <Input
-                      className="login__input"
-                      label="Notendanafn"
-                      name="username"
-                      value={username}
-                      invalid={usernameInvalid}
-                      onChange={onUsernameChange}
-                    />
+                    <form className="login__form" onSubmit={onSubmit(loginUser)}>
+                      <Input
+                        className="login__input"
+                        label="Notendanafn"
+                        name="username"
+                        value={username}
+                        invalid={usernameInvalid}
+                        onChange={onUsernameChange}
+                      />
 
-                    <Input
-                      className="login__input"
-                      type="password"
-                      label="Lykilorð"
-                      name="password"
-                      value={password}
-                      invalid={passwordInvalid}
-                      onChange={onPasswordChange}
-                    />
+                      <Input
+                        className="login__input"
+                        type="password"
+                        label="Lykilorð"
+                        name="password"
+                        value={password}
+                        invalid={passwordInvalid}
+                        onChange={onPasswordChange}
+                      />
 
-                    <Button className="login__button" disabled={loading}>Skrá inn</Button>
-                  </form>
+                      <Button color="primary" variant="contained" className="login__button" disabled={loading} onClick={onSubmit(loginUser)}>Skrá inn</Button>
+                    </form>
                 )}
-                <p><Link className="login__link" to="/register">Nýskráning</Link></p>
+                <Button color="primary" onClick={onClick}>Nýskráning</Button>
               </div>
             </div>
           </div>
+          </ThemeProvider>
         );
       }}
     </Context.Consumer>

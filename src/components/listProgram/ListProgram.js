@@ -47,7 +47,6 @@ const useStyles = makeStyles(theme => ({
 export default function ListProgram(props) {
 
   let history = useHistory();
-
   let exercise = props.exercise;
 
   const classes = useStyles();
