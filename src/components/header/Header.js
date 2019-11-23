@@ -90,9 +90,6 @@ export default function Home(props) {
                 <NavLink exact to="/client/programs">
                   <Button color="secondary">Skoða Æfingarprógram</Button>
                 </NavLink>
-                <NavLink exact to="/program">
-                  <Button color="secondary">Nýtt Prógram</Button>
-                </NavLink>
                 <User />
               </Toolbar>
             </AppBar>

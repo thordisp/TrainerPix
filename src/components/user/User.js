@@ -52,6 +52,12 @@ export default function User() {
 
         return (
           <p className="user__info">
+            <NavLink exact to="/program">
+              <Button color="secondary">Nýtt Prógram</Button>
+            </NavLink>
+            <NavLink activeClassName="user__link--selected" className="user__link" to="/newClient">
+              <Button color="secondary">Nýr Skjólstæðingur</Button>
+            </NavLink>
             <NavLink
               activeClassName="user__link--selected"
               className="user__link" to="/logout"

@@ -10,6 +10,7 @@ import NewProgram from './routes/newProgram/NewProgram';
 import NewExercise from './routes/newExercise/NewExercise';
 import AccessProgram from './routes/accessProgram/AccessProgram';
 import ViewProgram from './routes/viewProgram/ViewProgram';
+import NewClient from './routes/newClient/NewClient';
 import Register from './routes/register/Register';
 import Login from './routes/login/Login';
 import Success from './routes/system-pages/Success';
@@ -43,6 +44,7 @@ function App(props: Props) {
             <Route path="/client/programs/:clientId/:programId" exact component={ViewProgram} />
             <Route path="/register" exact component={Register} />
             <Route path="/login" exact component={Login} />
+            <Route path="/newClient" exact component={NewClient} />
             <Route path="/success/:clientId" exact component={Success} />
             <Route component={NotFound} />
           </Switch>

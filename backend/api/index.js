@@ -8,13 +8,13 @@ const requireAdmin = [
 ];
 
 const {
+  createClient,
+  listClient,
   listClients,
   listUser,
   updateUser,
   currentUser,
   updateCurrentUser,
-  listClient,
-  newPin,
 } = require('./users');
 
 const {
@@ -63,7 +63,6 @@ router.patch('/users/:id', requireAdmin, catchErrors(updateUser));
 // TODO: Bæta við require Auth
 router.post('/program', catchErrors(addProgram));
 router.post('/program/:programId/add/', catchErrors(addExercise));
-router.patch('/program/:programId/add/:userId', catchErrors(newPin));
 router.delete('/program/:id', catchErrors(deleteProgram));
 
 router.post('/client/programs', catchErrors(clientProgram));
@@ -71,5 +70,6 @@ router.get('/client/programs/:clientId', catchErrors(listProgram));
 router.get('/client/programs/:clientId/:programId', catchErrors(listExercises));
 
 router.get('/success/:clientId', catchErrors(listClient));
+router.post('/newClient', catchErrors(createClient));
 
 module.exports = router;

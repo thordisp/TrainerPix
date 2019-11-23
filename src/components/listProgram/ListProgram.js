@@ -54,17 +54,6 @@ export default function ListProgram(props) {
   async function onClick (e) {
     e.preventDefault();
 
-    // Create a random number for link.
-    const generatePin = Math.floor(1000 + (9999 - 1000) * Math.random());
-
-    const create = await newPin(generatePin, props.clientId);
-
-    if(!create.ok) {
-      console.log('Villa vid ad uppfaera pin');
-    } else (
-      console.log('Pin uppfaert.')
-    );
-
     // Senda notanda áfram á "/program/:clientID/view", ásamt pin skjólstæðings.
       history.push(`/success/${props.clientId}`);
   }

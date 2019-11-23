@@ -149,7 +149,7 @@ export default function SimpleSelect(props) {
             </Select>
           </FormControl>
           <div className="buttonWrapper">
-            <Button color="primary" variant="contained">Submit</Button>
+            <Button color="primary" variant="contained" onClick={onSubmit}>Búta til prógram</Button>
           </div>
         </form>
       </div>

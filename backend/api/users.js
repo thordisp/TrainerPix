@@ -1,3 +1,5 @@
+const xss = require('xss');
+
 const {
   validateUser,
   updateUser,
@@ -7,36 +9,40 @@ const {
 const { query } = require('../utils/db');
 const { isBoolean } = require('../utils/validation');
 
-// Returns all clients.
-async function listClients(req, res) {
+async function newClient(name, email) {
+
+  // Create a random number for link.
+  const generatePin = Math.floor(1000 + (9999 - 1000) * Math.random());
 
   const q = `
-    SELECT
-      *
-    FROM
-      clients`;
+    INSERT INTO
+      clients (name, email, pin)
+    VALUES
+      ($1, $2, ${generatePin})
+    RETURNING *`;
 
-  const clients = await query(q);
+  const values = [xss(name), xss(email)];
+  const result = await query(
+    q,
+    values,
+  );
 
-  if(!clients) {
-    return res.status(404).json({ error: 'No clients found' });
+  return result.rows[0];
+}
+
+async function createClient(req, res) {
+  const { name, email } = req.body;
+
+  const client = await newClient(name, email);
+
+  if (!client) {
+    return res.status(400).json({ errors: 'Could not register new client.' });
   }
 
-  return res.json(clients.rows);
+  return res.status(201).json(client);
 }
 
-async function getClient(clientId) {
-  const q = `
-  SELECT
-    *
-  FROM
-    clients
-  WHERE
-    id = $1`;
-
-  return query(q, [ clientId ]);
-}
-
+// Get client by id.
 async function listClient(req, res, next) {
   const { clientId } = req.params;
 
@@ -59,6 +65,37 @@ async function listUser(req, res) {
   }
 
   return res.json(user);
+}
+
+// Returns all clients.
+async function listClients(req, res) {
+
+  const q = `
+    SELECT
+      *
+    FROM
+      clients`;
+
+  const clients = await query(q);
+
+  if(!clients) {
+    return res.status(404).json({ error: 'No clients found' });
+  }
+
+  return res.json(clients.rows);
+}
+
+// DB: Find client by id.
+async function getClient(clientId) {
+  const q = `
+  SELECT
+    *
+  FROM
+    clients
+  WHERE
+    id = $1`;
+
+  return query(q, [ clientId ]);
 }
 
 async function updateUserRoute(req, res) {
@@ -137,38 +174,14 @@ async function updateCurrentUser(req, res) {
   return res.status(200).json(result);
 }
 
-async function updateUserPin(pin, userId) {
-  const q = `
-    UPDATE
-      clients
-    SET
-      pin = $1
-    WHERE
-      id = $2
-    RETURNING
-      pin`;
-
-  return query(q, [ pin, userId ]);
-}
-
-// Uppfærir pin hjá notanda.
-async function newPin(req, res) {
-  const { pin } = req.body;
-  const { userId } = req.params;
-
-  const q = await updateUserPin( pin, userId );
-
-  return res.status(201).json(q.rows[0]);
-}
-
 
 
 module.exports = {
+  createClient,
+  listClient,
   listClients,
   listUser,
   updateUser: updateUserRoute,
   currentUser: currentUserRoute,
   updateCurrentUser,
-  listClient,
-  newPin,
 };

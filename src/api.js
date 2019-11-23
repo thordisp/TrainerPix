@@ -208,18 +208,17 @@ export async function registerUser(username, password, email) {
   };
 }
 
-export async function newPin(pin, userId, programId) {
-  const url = new URL(`/program/${programId}/add/${userId}`, apiUrl);
+export async function createClient(name, email) {
+  const url = new URL(`/newClient`, apiUrl);
   const response = await fetch(url.href, {
-    method: "PATCH",
+    method: "POST",
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      pin,
-      userId,
-      programId,
+      name,
+      email,
     })
   });
 
@@ -227,7 +226,7 @@ export async function newPin(pin, userId, programId) {
 
   return {
     ok: response.ok,
-    result,
+    data: result,
   };
 }
 
