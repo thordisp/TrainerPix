@@ -208,13 +208,14 @@ export async function registerUser(username, password, email) {
   };
 }
 
-export async function createClient(name, email) {
+export async function createClient(name, email, user) {
   const url = new URL(`/newClient`, apiUrl);
   const response = await fetch(url.href, {
     method: "POST",
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
+      "Authorization" :  `Bearer ${user.token}`,
     },
     body: JSON.stringify({
       name,

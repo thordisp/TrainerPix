@@ -9,6 +9,7 @@ const {
   isNotEmptyString,
   toPositiveNumberOrDefault,
 } = require('../utils/validation');
+
 const catchErrors = require('../utils/catchErrors');
 
 const app = express();

@@ -33,6 +33,23 @@ async function findByUsername(username) {
   return null;
 }
 
+async function findClientByEmail(email, trainerId) {
+  const q = `
+    SELECT
+      id, name, email, pin, userid
+    FROM
+      clients
+    WHERE email = $1 AND userid = $2`;
+
+  const result = await query(q, [email, trainerId]);
+
+  if (result.rowCount > 0) {
+    return result.rows[0];
+  }
+
+  return null;
+}
+
 async function findByEmail(email) {
   const q = `
     SELECT
@@ -106,6 +123,44 @@ async function validateUser(
           error: 'Email exists',
         });
       }
+    }
+  }
+
+  return validations;
+}
+
+async function validateClient(
+  { name, email, user } = {},
+  patching = false,
+  id = null,
+) {
+  const validations = [];
+
+  // can't patch username
+  if (!patching) {
+    if (!isNotEmptyString(name, { min: 3, max: 32 })) {
+      validations.push({
+        field: 'name',
+        error: lengthValidationError(name, 3, 32),
+      });
+    }
+  }
+
+  if (!patching || email || isEmpty(email)) {
+    if (!isNotEmptyString(email, { min: 1, max: 64 })) {
+      validations.push({
+        field: 'email',
+        error: lengthValidationError(1, 64),
+      });
+    }
+
+    const client = await findClientByEmail(String(email), user.id);
+
+    if (client) {
+      validations.push({
+        field: 'email',
+        error: 'Trainer has already registrered this client.',
+      });
     }
   }
 
@@ -196,6 +251,7 @@ async function updateUser(id, password, email) {
 
 module.exports = {
   validateUser,
+  validateClient,
   comparePasswords,
   findByUsername,
   findById,

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import Input from '../../components/input/Input';
-import { useHistory } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
@@ -34,16 +33,15 @@ export default function Register() {
   const [error, setError] = useState([]);
   const [success, setSuccess] = useState(false);
 
-  let history = useHistory();
-
   async function onSubmit(e) {
     e.preventDefault();
+
+    const user = JSON.parse(localStorage.getItem('user'));
 
     setLoading(true);
 
     try {
-      const result = await createClient(name, email);
-      console.log('result: ' + result.data + ', name: ' + name + ', email: ' + email);
+      const result = await createClient(name, email, user);
 
       if (!result.ok) {
         setError(result.data.errors);
@@ -88,13 +86,13 @@ export default function Register() {
             {!loading && !success && (
               <form className="register__form" onSubmit={onSubmit}>
                 {error && (
-                  <ul className="register__error">
+                  <div className="register__error">
                     {error.map((e, i) => (
-                      <li key={i}>
+                      <p key={i}>
                         <label htmlFor={e.field}>{e.field}, {e.error}</label>
-                      </li>
+                      </p>
                     ))}
-                  </ul>
+                  </div>
                 )}
                 <Input
                   className="register__input"

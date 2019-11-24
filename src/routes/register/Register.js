@@ -133,7 +133,7 @@ export default function Register() {
                   onChange={onEmailChange}
                 />
 
-                <Button color="primary" variant="contained" className="register__button" disabled={loading}>Nýskrá</Button>
+                <Button color="primary" variant="contained" className="register__button" disabled={loading} onClick={onSubmit}>Nýskrá</Button>
               </form>
             )}
             <Button color="primary" onClick={onClick}>Innskráning</Button>

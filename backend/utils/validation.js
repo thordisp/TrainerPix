@@ -15,14 +15,12 @@ function isBoolean(b) {
 }
 
 function lengthValidationError(s, min, max) {
-  const length = s && s.length ? s.length : 'undefined';
 
-  const minMsg = min ? `at least ${min} characters` : '';
-  const maxMsg = max ? `at most ${max} characters` : '';
-  const msg = [minMsg, maxMsg].filter(Boolean).join(', ');
-  const lenMsg = `Current length is ${length}.`;
+  const minMsg = min ? `að minnsta kosti ${min} stafir` : '';
+  const maxMsg = max ? `í mesta lagi ${max} stafir` : '';
+  const msg = [minMsg, maxMsg].filter(Boolean).join(', og ');
 
-  return `Must be non empty string ${msg}. ${lenMsg}`;
+  return `verður að vera ${msg}.`;
 }
 
 function isNotEmptyString(s, { min = undefined, max = undefined } = {}) {

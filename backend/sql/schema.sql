@@ -12,10 +12,13 @@ CREATE TABLE users (
 CREATE TABLE clients (
   id SERIAL PRIMARY KEY,
   name VARCHAR(256),
-  email VARCHAR(256) NOT NULL UNIQUE,
+  email VARCHAR(256) NOT NULL,
   pin int UNIQUE,
+  userId int,
   created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp,
-  updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp
+  updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp,
+  UNIQUE (email, userId),
+  FOREIGN KEY (userId) REFERENCES users (id)
 );
 
 CREATE TABlE program (

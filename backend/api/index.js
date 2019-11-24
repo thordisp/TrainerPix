@@ -70,6 +70,6 @@ router.get('/client/programs/:clientId', catchErrors(listProgram));
 router.get('/client/programs/:clientId/:programId', catchErrors(listExercises));
 
 router.get('/success/:clientId', catchErrors(listClient));
-router.post('/newClient', catchErrors(createClient));
+router.post('/newClient', requireAuth, catchErrors(createClient));
 
 module.exports = router;

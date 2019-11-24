@@ -6,22 +6,24 @@ const {
   findById,
 } = require('../authentication/users');
 
+const { validateClient } = require('../authentication/users');
+
 const { query } = require('../utils/db');
 const { isBoolean } = require('../utils/validation');
 
-async function newClient(name, email) {
+async function newClient(name, email, userId) {
 
   // Create a random number for link.
   const generatePin = Math.floor(1000 + (9999 - 1000) * Math.random());
 
   const q = `
     INSERT INTO
-      clients (name, email, pin)
+      clients (name, email, pin, userId)
     VALUES
-      ($1, $2, ${generatePin})
+      ($1, $2, ${generatePin}, $3)
     RETURNING *`;
 
-  const values = [xss(name), xss(email)];
+  const values = [xss(name), xss(email), xss(userId)];
   const result = await query(
     q,
     values,
@@ -33,7 +35,20 @@ async function newClient(name, email) {
 async function createClient(req, res) {
   const { name, email } = req.body;
 
-  const client = await newClient(name, email);
+  const user = req.user;
+
+  if (!user) {
+    return res.status(400).json({ errors: 'Trainer must be logged in to register a new client.'});
+  }
+
+  const validationMessage =
+    await validateClient({ name, email, user });
+
+  if (validationMessage.length > 0) {
+    return res.status(400).json({ errors: validationMessage });
+  }
+
+  const client = await newClient(name, email, user.id);
 
   if (!client) {
     return res.status(400).json({ errors: 'Could not register new client.' });
