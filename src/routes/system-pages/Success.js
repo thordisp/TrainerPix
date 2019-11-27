@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { useHistory } from 'react-router-dom';
 import './SystemPages.scss';
 import { Link } from 'react-router-dom';
 import{ getClient } from '../../api';
@@ -9,14 +9,20 @@ export default function Success(props) {
   const clientId = props.match.params.clientId;
   const [clientPin, setClientPin] = useState(null);
 
+  let history = useHistory();
+
   useEffect(() => {
     async function fetchData() {
       const user = JSON.parse(localStorage.getItem('user'));
-      const result = await getClient(clientId, user);
-      if(!result.ok) {
-        console.log('Villa vid ad saekja pin.');
+      if(!user) {
+        history.push("/login");
       } else {
-        setClientPin(result.data[0].pin);
+        const result = await getClient(clientId, user);
+        if(!result.ok) {
+          console.log('Villa vid ad saekja pin.');
+        } else {
+          setClientPin(result.data[0].pin);
+        }
       }
     }
     fetchData();
