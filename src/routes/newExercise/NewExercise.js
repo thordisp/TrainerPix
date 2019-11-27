@@ -1,8 +1,10 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import './NewExercise.scss';
 import Form from '../../components/form/Form';
 import Webcam from '../../components/webcam/Webcam';
 import ListProgram from '../../components/listProgram/ListProgram';
+import { Context } from '../../UserContext';
 
 class NewExercise extends React.Component {
 
@@ -60,31 +62,45 @@ class NewExercise extends React.Component {
 
   render() {
     return (
-      <div className="form-container">
-        <Form
-          updateExercise={this.updateExercise}
-          programId={this.state.programId}
-          ClientId={this.state.clientId}
-          image1={this.state.image1}
-          image2={this.state.image2}
-          toggleFirstCam={this.toggleFirstCam}
-          toggleSecondCam={this.toggleSecondCam}
-          />
-        <Webcam
-          image1={this.state.image1}
-          image2={this.state.image2}
-          firstWebcamEnabled={this.state.firstWebcamEnabled}
-          secondWebcamEnabled={this.state.secondWebcamEnabled}
-          updateFirstImage={this.updateFirstImage}
-          updateSecondImage={this.updateSecondImage}
-          toggleFirstCam={this.toggleFirstCam}
-          toggleSecondCam={this.toggleSecondCam}
-        />
-        <ListProgram
-          exercise={this.state.exercise}
-          clientId={this.state.clientId}
-        />
-      </div>
+      <Context.Consumer>
+        {({ authenticated }) => {
+          return (
+            <div>
+              {authenticated && (
+                <div className="form-container">
+                <Form
+                  updateExercise={this.updateExercise}
+                  programId={this.state.programId}
+                  ClientId={this.state.clientId}
+                  image1={this.state.image1}
+                  image2={this.state.image2}
+                  toggleFirstCam={this.toggleFirstCam}
+                  toggleSecondCam={this.toggleSecondCam}
+                  />
+                <Webcam
+                  image1={this.state.image1}
+                  image2={this.state.image2}
+                  firstWebcamEnabled={this.state.firstWebcamEnabled}
+                  secondWebcamEnabled={this.state.secondWebcamEnabled}
+                  updateFirstImage={this.updateFirstImage}
+                  updateSecondImage={this.updateSecondImage}
+                  toggleFirstCam={this.toggleFirstCam}
+                  toggleSecondCam={this.toggleSecondCam}
+                />
+                <ListProgram
+                  exercise={this.state.exercise}
+                  clientId={this.state.clientId}
+                />
+              </div>
+              )}
+
+              {!authenticated && (
+                <Redirect to={{pathname: '/login', state: {from: this.props.location}}} />
+              )}
+            </div>
+          )
+        }}
+      </Context.Consumer>
     )
   }
 }
