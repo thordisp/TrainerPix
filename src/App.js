@@ -44,7 +44,7 @@ function App(props: Props) {
             <Route path="/client/programs/:clientId" exact component={AccessProgram} />
             <Route path="/client/programs/:clientId/:programId" exact component={ViewProgram} />
             <Route path="/register" exact component={Register} />
-            <Route authed={props.authed} path="/login" exact component={Login} />
+            <Route path="/login" exact component={Login} />
             <Route path="/newClient" exact component={NewClient} />
             <Route path="/success/:clientId" exact component={Success} />
             <Route path="/access_denied" exact component={NoAccess} />

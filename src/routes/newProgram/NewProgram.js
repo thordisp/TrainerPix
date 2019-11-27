@@ -35,13 +35,27 @@ class NewProgram extends React.Component {
 
   render() {
     return (
-      <div className="form-container">
-        <ProgramForm
-          clients = {this.state.clients}
-          updateClients={this.updateClients}
-          updateClientId={this.updateClientId}
-        />
-      </div>
+      <Context.Consumer>
+        {({ authenticated }) => {
+          return (
+            <div>
+              {authenticated && (
+                <div className="form-container">
+                  <ProgramForm
+                    clients = {this.state.clients}
+                    updateClients={this.updateClients}
+                    updateClientId={this.updateClientId}
+                  />
+                </div>
+              )}
+
+              {!authenticated && (
+                <Redirect to={{pathname: '/login', state: {from: this.props.location}}} />
+              )}
+            </div>
+          )
+        }}
+      </Context.Consumer>
     )
   }
 }

@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import { Context } from '../../UserContext';
 
 import './Login.scss';
-import { userInfo } from 'os';
 
 const theme = createMuiTheme({
   palette: {
@@ -27,7 +26,7 @@ const theme = createMuiTheme({
   },
 });
 
-export default function Login(authed) {
+export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');  // eslint-disable-next-line
   const [loading, setLoading] = useState(false); // eslint-disable-next-line
@@ -39,14 +38,6 @@ export default function Login(authed) {
     e.preventDefault();
 
     loginUser(username, password);
-
-    let user = JSON.parse(localStorage.getItem('user'));
-
-    if(!user) {
-      authed.setState({ authed: true });
-    } else {
-      authed.setState({ authed: false });
-    }
   }
 
   function onUsernameChange(e) {
