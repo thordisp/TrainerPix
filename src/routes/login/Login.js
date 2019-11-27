@@ -111,7 +111,7 @@ export default function Login() {
                         onChange={onPasswordChange}
                       />
 
-                      <Button color="primary" variant="contained" className="login__button" disabled={loading} onClick={onSubmit(loginUser)}>Skrá inn</Button>
+                      <Button color="primary" variant="contained" className="login__button" disabled={loading} type="submit">Skrá inn</Button>
                     </form>
                 )}
                 <Button color="primary" onClick={onClick}>Nýskráning</Button>

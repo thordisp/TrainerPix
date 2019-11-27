@@ -180,7 +180,7 @@ export default function Form(props) {
               </Card>
               )}
               <div>
-                <Button onClick={onSubmit}>Submit</Button>
+                <Button type="submit">Submit</Button>
               </div>
             </form>
           </ThemeProvider>
