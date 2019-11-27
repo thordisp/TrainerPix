@@ -19,6 +19,8 @@ class NewExercise extends React.Component {
     this.updateSecondImage = this.updateSecondImage.bind(this);
     this.toggleFirstCam = this.toggleFirstCam.bind(this);
     this.toggleSecondCam = this.toggleSecondCam.bind(this);
+    this.toggleCam1Button = this.toggleCam1Button.bind(this);
+    this.toggleCam2Button = this.toggleCam2Button.bind(this);
 
     this.state = {
       exercise: [],
@@ -27,7 +29,9 @@ class NewExercise extends React.Component {
       image1: '',
       image2: '',
       firstWebcamEnabled: false,
-      secondWebcamEnabled: false
+      secondWebcamEnabled: false,
+      camButton1Active: false,
+      camButton2Active: false,
     };
   }
 
@@ -60,6 +64,14 @@ class NewExercise extends React.Component {
     this.setState({ secondWebcamEnabled: !this.state.secondWebcamEnabled });
   }
 
+  toggleCam1Button() {
+    this.setState({ camButton1Active: !this.state.camButton1Active });
+  }
+
+  toggleCam2Button() {
+    this.setState({ camButton2Active: !this.state.camButton2Active });
+  }
+
   render() {
     return (
       <Context.Consumer>
@@ -76,6 +88,10 @@ class NewExercise extends React.Component {
                   image2={this.state.image2}
                   toggleFirstCam={this.toggleFirstCam}
                   toggleSecondCam={this.toggleSecondCam}
+                  camButton1Active={this.state.camButton1Active}
+                  camButton2Active={this.state.camButton2Active}
+                  toggleCam1Button={this.toggleCam1Button}
+                  toggleCam2Button={this.toggleCam2Button}
                   />
                 <Webcam
                   image1={this.state.image1}
@@ -86,6 +102,8 @@ class NewExercise extends React.Component {
                   updateSecondImage={this.updateSecondImage}
                   toggleFirstCam={this.toggleFirstCam}
                   toggleSecondCam={this.toggleSecondCam}
+                  toggleCam1Button={this.toggleCam1Button}
+                  toggleCam2Button={this.toggleCam2Button}
                 />
                 <ListProgram
                   exercise={this.state.exercise}

@@ -1,12 +1,7 @@
 @import '../../config.scss';
 
-.listContainer {
-  margin: $gutter;
+.camContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.button-container {
-  margin-top: 20px;
 }

@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
-
+var bodyParser = require('body-parser');
 const requireEnv = require('./utils/requireEnv');
 
 requireEnv(['DATABASE_URL', 'JWT_SECRET']);
@@ -17,6 +17,9 @@ const {
 
 const app = express();
 app.use(express.json());
+
+app.use(bodyParser.json({limit: '10mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 // CORS til að geta gert ajax beiðnir frá öðrum serverum
 app.use(cors);

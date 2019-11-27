@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
@@ -11,6 +13,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
 import { addExercise } from '../../api';
+import './Form.scss';
 
 const theme = createMuiTheme({
   palette: {
@@ -34,6 +37,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     display: 'flex',
     justifyContent: 'center',
+    marginTop: '20px',
   },
   container: {
     display: 'flex',
@@ -50,6 +54,9 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     height: 140,
+  },
+  fab: {
+    margin: theme.spacing(1),
   },
 }));
 
@@ -93,11 +100,13 @@ export default function Form(props) {
   function toggleFirstCamera(e) {
     e.preventDefault();
     props.toggleFirstCam();
+    props.toggleCam2Button();
   }
 
   function toggleSecondCamera(e){
     e.preventDefault();
     props.toggleSecondCam();
+    props.toggleCam1Button();
   }
 
   return (
@@ -144,7 +153,9 @@ export default function Form(props) {
                 />
               </div>
               {props.image1 === '' ? (
-                <Button onClick={toggleFirstCamera}>First Image</Button>
+                <div className="buttonWrapper">
+                  <Button variant="contained" color="secondary" onClick={toggleFirstCamera} disabled={props.camButton1Active}>First Image</Button>
+                </div>
               ) : (
                 <Card className={classes.card}>
                 <CardActionArea>
@@ -154,15 +165,17 @@ export default function Form(props) {
                     title="First Image"
                   />
                 </CardActionArea>
-                <CardActions>
-                  <Button>
+                <CardActions className={classes.root}>
+                  <Button color="primary">
                     Retake
                   </Button>
                 </CardActions>
               </Card>
               )}
               {props.image2 === '' ? (
-                <Button onClick={toggleSecondCamera}>Second Image</Button>
+                <div className="buttonWrapper">
+                  <Button variant="contained" color="secondary" onClick={toggleSecondCamera} disabled={props.camButton2Active}>Second Image</Button>
+                </div>
               ) : (
                 <Card className={classes.card}>
                 <CardActionArea>
@@ -172,15 +185,17 @@ export default function Form(props) {
                     title="Second Image"
                   />
                 </CardActionArea>
-                <CardActions>
-                  <Button>
+                <CardActions className={classes.root}>
+                  <Button color="primary">
                     Retake
                   </Button>
                 </CardActions>
               </Card>
               )}
               <div>
-                <Button type="submit">Submit</Button>
+                <Fab color="secondary" aria-label="add" className={classes.fab} type="submit">
+                  <AddIcon />
+                </Fab>
               </div>
             </form>
           </ThemeProvider>

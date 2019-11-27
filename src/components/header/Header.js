@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 
 import User from '../user/User';
 import './Header.scss';
+import { fontSize } from '@material-ui/system';
 
 const theme = createMuiTheme({
   palette: {
