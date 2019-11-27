@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -55,23 +56,31 @@ const useStyles = makeStyles(theme => ({
 export default function Form(props) {
   const classes = useStyles();
 
+  let history = useHistory();
+
   const [data, setData] = useState({ sets: 0, reps: 0, description: '' });
   // const [errors, setErrors] = useState([]);
 
   async function onSubmit(e) {
     e.preventDefault();
 
-    const created = await addExercise(props.programId, data.sets, data.reps, data.description, props.image1, props.image2);
+    const user = JSON.parse(localStorage.getItem('user'));
 
-    if (!created.ok) {
-      // setErrors(created.result);
-      console.log('Villa við að bæta við æfingu.');
-      console.log('Villa: ' + created.result);
+    if(!user) {
+      history.push('/access_denied');
     } else {
-      props.updateExercise(props.programId, data.sets, data.reps, data.description, props.image1, props.image2 );
-      console.log("programId: " + props.programId);
-      setData({ sets: 0, reps: 0, description: '' });
-      console.log('Æfingu var bætt við.');
+      const created = await addExercise(props.programId, data.sets, data.reps, data.description, props.image1, props.image2, user);
+
+      if (!created.ok) {
+        // setErrors(created.result);
+        console.log('Villa við að bæta við æfingu.');
+        console.log('Villa: ' + created.result);
+      } else {
+        props.updateExercise(props.programId, data.sets, data.reps, data.description, props.image1, props.image2 );
+        console.log("programId: " + props.programId);
+        setData({ sets: 0, reps: 0, description: '' });
+        console.log('Æfingu var bætt við.');
+      }
     }
   }
 
@@ -171,7 +180,7 @@ export default function Form(props) {
               </Card>
               )}
               <div>
-                <Button>Submit</Button>
+                <Button onClick={onSubmit}>Submit</Button>
               </div>
             </form>
           </ThemeProvider>

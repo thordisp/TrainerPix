@@ -74,12 +74,11 @@ export default function SimpleSelect(props) {
 
     // Get userId (trainer).
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log('user: ' + user.user.id);
 
     // Create a link to where the exercises are added to program.
     const programLink = `/program/${clients}/view`;
 
-    const created = await addProgram(user.user.id, clients, data.name, programLink);
+    const created = await addProgram(user.user.id, clients, data.name, programLink, user);
 
     if (!created.ok) {
       // setErrors(created.result);

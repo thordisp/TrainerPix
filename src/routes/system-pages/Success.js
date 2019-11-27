@@ -11,7 +11,8 @@ export default function Success(props) {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await getClient(clientId);
+      const user = JSON.parse(localStorage.getItem('user'));
+      const result = await getClient(clientId, user);
       if(!result.ok) {
         console.log('Villa vid ad saekja pin.');
       } else {

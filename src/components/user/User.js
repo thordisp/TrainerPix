@@ -105,7 +105,7 @@ export default function User() {
                 color="inherit"
               >
                 <AccountCircle />
-              </IconButton>
+              </IconButton >
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}

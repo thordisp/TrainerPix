@@ -13,9 +13,10 @@ import ViewProgram from './routes/viewProgram/ViewProgram';
 import NewClient from './routes/newClient/NewClient';
 import Register from './routes/register/Register';
 import Login from './routes/login/Login';
-import Success from './routes/system-pages/Success';
 
+import Success from './routes/system-pages/Success';
 import NotFound from './routes/system-pages/NotFound';
+import NoAccess from './routes/system-pages/NoAccess';
 
 import './App.scss';
 
@@ -43,9 +44,10 @@ function App(props: Props) {
             <Route path="/client/programs/:clientId" exact component={AccessProgram} />
             <Route path="/client/programs/:clientId/:programId" exact component={ViewProgram} />
             <Route path="/register" exact component={Register} />
-            <Route path="/login" exact component={Login} />
+            <Route authed={props.authed} path="/login" exact component={Login} />
             <Route path="/newClient" exact component={NewClient} />
             <Route path="/success/:clientId" exact component={Success} />
+            <Route path="/access_denied" exact component={NoAccess} />
             <Route component={NotFound} />
           </Switch>
         </main>

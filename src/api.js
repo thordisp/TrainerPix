@@ -8,13 +8,14 @@ const { apiUrl } = require('./config');
  * @param {*} clientId
  * @param {*} link
  */
-export async function addProgram(userId, clientId, name, link) {
+export async function addProgram(userId, clientId, name, link, user) {
   const url = new URL(`/program`, apiUrl);
   const response = await fetch(url.href, {
     method: "POST",
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
+      "Authorization" :  `Bearer ${user.token}`,
     },
     body: JSON.stringify({
       userId,
@@ -55,13 +56,14 @@ export async function getProgram(clientId) {
  * @param {*} repsNumber
  * @param {*} workoutDescription
  */
-export async function addExercise(programId, setNumber, repsNumber, workoutDescription, image1, image2) {
+export async function addExercise(programId, setNumber, repsNumber, workoutDescription, image1, image2, user) {
   const url = new URL(`/program/${programId}/add/`, apiUrl);
   const response = await fetch(url.href, {
     method: "POST",
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
+      "Authorization" :  `Bearer ${user.token}`,
     },
     body: JSON.stringify({
       programId,
@@ -231,9 +233,16 @@ export async function createClient(name, email, user) {
   };
 }
 
-export async function getClient(clientId) {
+export async function getClient(clientId, user) {
   const url = new URL(`/success/${clientId}`, apiUrl);
-  const response = await fetch(url.href);
+  const response = await fetch(url.href, {
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization" :  `Bearer ${user.token}`,
+    }
+  });
+
   const result = await response.json();
 
   return {

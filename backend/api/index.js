@@ -61,15 +61,15 @@ router.get('/users/:id', requireAdmin, catchErrors(listUser));
 router.patch('/users/:id', requireAdmin, catchErrors(updateUser));
 
 // TODO: Bæta við require Auth
-router.post('/program', catchErrors(addProgram));
-router.post('/program/:programId/add/', catchErrors(addExercise));
+router.post('/program', requireAuth, catchErrors(addProgram));
+router.post('/program/:programId/add/', requireAuth, catchErrors(addExercise));
 router.delete('/program/:id', catchErrors(deleteProgram));
 
 router.post('/client/programs', catchErrors(clientProgram));
 router.get('/client/programs/:clientId', catchErrors(listProgram));
 router.get('/client/programs/:clientId/:programId', catchErrors(listExercises));
 
-router.get('/success/:clientId', catchErrors(listClient));
+router.get('/success/:clientId', requireAuth, catchErrors(listClient));
 router.post('/newClient', requireAuth, catchErrors(createClient));
 
 module.exports = router;
