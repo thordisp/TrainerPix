@@ -110,9 +110,14 @@ export default function SimpleSelect(props) {
   // Todo: Birta aðeins skjólstæðinga sem viðeigandi trainer á.
   useEffect(() => {
     async function fetchData() {
-      const result = await listClients();
-      for(let i = 0; i < result.data.length; i++) {
-        props.updateClients(result.data[i].id, result.data[i].name);
+      const user = JSON.parse(localStorage.getItem('user'));
+      if(!user) {
+        history.push('/access_denied');
+      } else {
+        const result = await listClients(user.user.id, user.user);
+        for(let i = 0; i < result.data.length; i++) {
+          props.updateClients(result.data[i].id, result.data[i].name);
+        }
       }
     }
     fetchData();
