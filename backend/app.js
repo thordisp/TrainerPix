@@ -18,8 +18,8 @@ const {
 const app = express();
 app.use(express.json());
 
-app.use(bodyParser.json({limit: '10mb', extended: true}));
-app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 // CORS til að geta gert ajax beiðnir frá öðrum serverum
 app.use(cors);

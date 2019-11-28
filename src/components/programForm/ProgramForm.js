@@ -107,6 +107,7 @@ export default function SimpleSelect(props) {
   }
 
   // Get all clients to appear in select menu.
+  // Todo: Birta aðeins skjólstæðinga sem viðeigandi trainer á.
   useEffect(() => {
     async function fetchData() {
       const result = await listClients();

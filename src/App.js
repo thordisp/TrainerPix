@@ -8,6 +8,7 @@ import Home from './routes/home/Home';
 import About from './routes/about/About';
 import NewProgram from './routes/newProgram/NewProgram';
 import NewExercise from './routes/newExercise/NewExercise';
+import UserClients from './routes/userClients/UserClients';
 import AccessProgram from './routes/accessProgram/AccessProgram';
 import ViewProgram from './routes/viewProgram/ViewProgram';
 import NewClient from './routes/newClient/NewClient';
@@ -40,6 +41,7 @@ function App(props: Props) {
             <Route path="/about" exact component={About} />
             <Route path="/program" exact component={NewProgram} />
             <Route path="/program/:programId/add/:clientId" exact component={NewExercise} />
+            <Route path="/my_clients" exact component={UserClients} />
             <Route path="/client/programs" exact component={AccessProgram} />
             <Route path="/client/programs/:clientId" exact component={AccessProgram} />
             <Route path="/client/programs/:clientId/:programId" exact component={ViewProgram} />

@@ -72,6 +72,11 @@ export default function User() {
     history.push('/newClient');
   }
 
+  function toUserClients() {
+    setAnchorEl(null);
+    history.push('/my_clients');
+  }
+
   return (
     <Context.Consumer>
       {({ user, authenticated, logoutUser }) => {
@@ -123,6 +128,7 @@ export default function User() {
               >
                 <MenuItem onClick={toNewProgram}>Nýtt Æfingarprógram</MenuItem>
                 <MenuItem onClick={toNewClient}>Nýr Skjólstæðingur</MenuItem>
+                <MenuItem onClick={toUserClients}>Mínir Skjólstæðingar</MenuItem>
                 <MenuItem onClick={onClick(logoutUser)}>Útskrá</MenuItem>
               </Menu>
             </Toolbar>

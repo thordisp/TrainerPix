@@ -1,11 +1,9 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import ProgramForm from '../../components/programForm/ProgramForm';
+import ListClients from '../../components/listClients/ListClients';
 import { Context } from '../../UserContext';
 
-import './NewProgram.scss';
-
-class NewProgram extends React.Component {
+class UserClients extends React.Component {
 
   constructor(props) {
     super(props);
@@ -40,7 +38,7 @@ class NewProgram extends React.Component {
             <div>
               {authenticated && (
                 <div className="form-container">
-                  <ProgramForm
+                  <ListClients
                     clients = {this.state.clients}
                     updateClients={this.updateClients}
                     updateClientId={this.updateClientId}
@@ -59,4 +57,4 @@ class NewProgram extends React.Component {
   }
 }
 
-export default NewProgram
+export default UserClients
