@@ -82,19 +82,28 @@ async function listUser(req, res) {
   return res.json(user);
 }
 
+// DB: Find clients by userId.
+async function getClientsById(userId) {
+  const q = `
+  SELECT
+    *
+  FROM
+    clients
+  WHERE
+    userId = $1`;
+
+  return query(q, [ userId ]);
+}
+
 // Returns all clients.
 async function listClients(req, res) {
 
-  const q = `
-    SELECT
-      *
-    FROM
-      clients`;
+  const { userId } = req.params;
 
-  const clients = await query(q);
+  const clients = await getClientsById( userId );
 
-  if(!clients) {
-    return res.status(404).json({ error: 'No clients found' });
+  if (!clients) {
+    return res.status(404).json({ error: 'No clients found.' });
   }
 
   return res.json(clients.rows);

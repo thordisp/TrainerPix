@@ -136,7 +136,7 @@ export default function Register() {
                 <Button color="primary" variant="contained" className="register__button" disabled={loading} onClick={onSubmit}>Nýskrá</Button>
               </form>
             )}
-            <Button color="primary" onClick={onClick}>Innskráning</Button>
+            <Button color="primary" type="submit">Innskráning</Button>
           </div>
         </div>
       </div>

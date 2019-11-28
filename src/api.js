@@ -143,9 +143,16 @@ export async function deleteExercise(id) {
 /**
  * Skilar lista af notendum
  */
-export async function listClients() {
-  const url = new URL(`/users`, apiUrl);
-  const response = await fetch(url.href);
+export async function listClients(userId, user) {
+  const url = new URL(`/users/${userId}`, apiUrl);
+  const response = await fetch(url.href, {
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization" :  `Bearer ${user.token}`,
+    }
+  });
+
   const result = await response.json();
 
   return {

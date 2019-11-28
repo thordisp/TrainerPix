@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -71,6 +72,8 @@ export default function UserListClients(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [clients, setClients] = useState([]);
 
+  let history = useHistory();
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -84,9 +87,14 @@ export default function UserListClients(props) {
   // Todo: Birta aðeins skjólstæðinga sem viðeigandi trainer á.
   useEffect(() => {
     async function fetchData() {
-      const result = await listClients();
-      for(let i = 0; i < result.data.length; i++) {
-        setClients(clients => [...clients, { name: result.data[i].name, email: result.data[i].email, pin: result.data[i].pin }]);
+      const user = JSON.parse(localStorage.getItem('user'));
+      if(!user) {
+        history.push('/access_denied');
+      } else {
+        const result = await listClients(user.user.id, user.user);
+        for(let i = 0; i < result.data.length; i++) {
+          setClients(clients => [...clients, { name: result.data[i].name, email: result.data[i].email, pin: result.data[i].pin }]);
+        }
       }
     }
     fetchData();
