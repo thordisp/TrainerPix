@@ -1,1 +1,13 @@
 @import '../../config.scss';
+
+.home-background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url("../../TrainerPix\ Cover\ Photo.jpg");
+  background-position: center center;
+  background-size: cover;
+  opacity: 0.7;
+
+}
