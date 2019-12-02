@@ -12,8 +12,8 @@ import { getExercises } from './../../api';
 
 const StyledTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: '#455a64',
-    color: theme.palette.common.white,
+    backgroundColor: '#bbdefb',
+    color: '#000000',
   },
   body: {
     fontSize: 14,
