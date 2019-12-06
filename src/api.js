@@ -1,6 +1,6 @@
 import 'isomorphic-fetch';
 
-const { apiUrl } = require('./config');
+const apiUrl = 'http://localhost:5000';
 
 /**
  * Býr til nýtt prógram.
