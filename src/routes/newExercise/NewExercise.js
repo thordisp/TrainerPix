@@ -92,6 +92,8 @@ class NewExercise extends React.Component {
                   camButton2Active={this.state.camButton2Active}
                   toggleCam1Button={this.toggleCam1Button}
                   toggleCam2Button={this.toggleCam2Button}
+                  updateFirstImage={this.updateFirstImage}
+                  updateSecondImage={this.updateSecondImage}
                   />
                 <Webcam
                   image1={this.state.image1}

@@ -65,7 +65,7 @@ export default function Form(props) {
 
   let history = useHistory();
 
-  const [data, setData] = useState({ sets: 0, reps: 0, description: '' });
+  const [data, setData] = useState({ sets: '', reps: '', description: '' });
   // const [errors, setErrors] = useState([]);
 
   async function onSubmit(e) {
@@ -84,8 +84,9 @@ export default function Form(props) {
         console.log('Villa: ' + created.result);
       } else {
         props.updateExercise(props.programId, data.sets, data.reps, data.description, props.image1, props.image2 );
-        console.log("programId: " + props.programId);
-        setData({ sets: 0, reps: 0, description: '' });
+        setData({ sets: '', reps: '', description: '' });
+        props.updateFirstImage('');
+        props.updateSecondImage('');
         console.log('Æfingu var bætt við.');
       }
     }
@@ -118,31 +119,33 @@ export default function Form(props) {
               <TextField
                   id="sets"
                   className={classes.textField}
-                  label="Sets"
+                  label="Lotur"
                   margin="normal"
                   variant="outlined"
                   type="text"
                   name="sets"
                   onChange={onChange}
+                  value={data.sets}
                 />
               </div>
               <div>
               <TextField
                   id="reps"
                   className={classes.textField}
-                  label="Reps"
+                  label="Endurtekningar"
                   margin="normal"
                   variant="outlined"
                   type="text"
                   name="reps"
                   onChange={onChange}
+                  value={data.reps}
                 />
               </div>
               <div>
               <TextField
                   id="description"
                   className={classes.textField}
-                  label="Description"
+                  label="Athugasemdir"
                   margin="normal"
                   multiline
                   rowsMax="4"
@@ -150,11 +153,12 @@ export default function Form(props) {
                   type="text"
                   name="description"
                   onChange={onChange}
+                  value={data.description}
                 />
               </div>
               {props.image1 === '' ? (
                 <div className="buttonWrapper">
-                  <Button variant="contained" color="secondary" onClick={toggleFirstCamera} disabled={props.camButton1Active}>First Image</Button>
+                  <Button variant="contained" color="secondary" onClick={toggleFirstCamera} disabled={props.camButton1Active}>Upphafsstaða</Button>
                 </div>
               ) : (
                 <Card className={classes.card}>
@@ -174,7 +178,7 @@ export default function Form(props) {
               )}
               {props.image2 === '' ? (
                 <div className="buttonWrapper">
-                  <Button variant="contained" color="secondary" onClick={toggleSecondCamera} disabled={props.camButton2Active}>Second Image</Button>
+                  <Button variant="contained" color="secondary" onClick={toggleSecondCamera} disabled={props.camButton2Active}>Lokastaða</Button>
                 </div>
               ) : (
                 <Card className={classes.card}>
