@@ -104,15 +104,15 @@ async function loginRoute(req, res) {
 
   if (!isNotEmptyString(username)) {
     validations.push({
-      field: 'username',
-      error: 'Username is required',
+      field: 'Notendanafn',
+      error: 'er krafist.',
     });
   }
 
   if (!isNotEmptyString(password)) {
     validations.push({
-      field: 'password',
-      error: 'Password is required',
+      field: 'Lykilorð',
+      error: 'er krafist.',
     });
   }
 

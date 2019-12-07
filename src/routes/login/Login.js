@@ -73,7 +73,7 @@ export default function Login() {
                 )}
 
                 {message && Array.isArray(message) && (
-                  <ul className="register__error">
+                  <ul className="login__error">
                     {message.map((e, i) => (
                       <li key={i}>
                         <label htmlFor={e.field}>{e.field}, {e.error}</label>

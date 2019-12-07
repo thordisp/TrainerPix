@@ -78,8 +78,8 @@ async function validateUser(
   if (!patching) {
     if (!isNotEmptyString(username, { min: 3, max: 32 })) {
       validations.push({
-        field: 'username',
-        error: lengthValidationError(username, 3, 32),
+        field: 'Notendanafn',
+        error: 'vinsamlegast sláðu inn notendanafn.',
       });
     }
 
@@ -87,8 +87,8 @@ async function validateUser(
 
     if (user) {
       validations.push({
-        field: 'username',
-        error: 'Username exists',
+        field: 'Notendanafn',
+        error: 'notendanafn er nú þegar til.',
       });
     }
   }
@@ -96,8 +96,8 @@ async function validateUser(
   if (!patching || password || isEmpty(password)) {
     if (!isNotEmptyString(password, { min: 8 })) {
       validations.push({
-        field: 'password',
-        error: lengthValidationError(password, 8),
+        field: 'Lykilorð',
+        error: 'þarf að vera að minnsta kosti 8 stafir.',
       });
     }
   }
@@ -105,8 +105,8 @@ async function validateUser(
   if (!patching || email || isEmpty(email)) {
     if (!isNotEmptyString(email, { min: 1, max: 64 })) {
       validations.push({
-        field: 'email',
-        error: lengthValidationError(1, 64),
+        field: 'Netfang',
+        error: 'vinsamlegast sláðu inn netfangið þitt.',
       });
     }
 
@@ -140,8 +140,8 @@ async function validateClient(
   if (!patching) {
     if (!isNotEmptyString(name, { min: 3, max: 32 })) {
       validations.push({
-        field: 'name',
-        error: lengthValidationError(name, 3, 32),
+        field: 'Nafn',
+        error: 'er krafist.',
       });
     }
   }
@@ -149,8 +149,8 @@ async function validateClient(
   if (!patching || email || isEmpty(email)) {
     if (!isNotEmptyString(email, { min: 1, max: 64 })) {
       validations.push({
-        field: 'email',
-        error: lengthValidationError(1, 64),
+        field: 'Netfang',
+        error: 'er krafist.',
       });
     }
 
