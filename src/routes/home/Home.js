@@ -11,7 +11,8 @@ import './Home.scss';
 const styles = () => ({
   root: {
     padding: '20px',
-    width: '40%',
+    width: '30%',
+    height: '70%',
   },
   login: {
     position: 'absolute',

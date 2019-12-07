@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import Input from '../../components/input/Input';
-import { useHistory } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
@@ -34,8 +33,6 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState([]);
   const [success, setSuccess] = useState(false);
-
-  let history = useHistory();
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -71,10 +68,6 @@ export default function Register() {
   function onEmailChange(e){
     const { target: { value = '' } = {} } = e;
     setEmail(value);
-  }
-
-  function onClick(e) {
-    history.push('/login');
   }
 
   const hasError = (f) => Boolean(error && error.find((i) => i.field === f));

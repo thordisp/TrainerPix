@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../../TrainerPixLogo6.png';
+import logo from '../../public/images/TrainerPixLogo6.png';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
@@ -11,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 
 import User from '../user/User';
 import './Header.scss';
-import { fontSize } from '@material-ui/system';
 
 const theme = createMuiTheme({
   palette: {
@@ -40,6 +39,9 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  Button: {
+    fontSize: 'medium',
+  }
 }));
 
 export default function Home(props) {
@@ -53,11 +55,11 @@ export default function Home(props) {
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.title}>
               <NavLink exact to="/">
-                <img src={logo} alt="Logo" />
+                <img className="headerLogo" src={logo} alt="Logo" />
               </NavLink>
             </Typography>
             <NavLink exact to="/about">
-              <Button color="secondary">Um Okkur</Button>
+              <Button className={classes.Button} color="secondary">Um Okkur</Button>
             </NavLink>
             <User />
           </Toolbar>

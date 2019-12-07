@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -61,6 +61,12 @@ export default function SimpleSelect(props) {
   const classes = useStyles();
   const [data, setData] = useState({ name: '' });
   const [clients, setClients] = useState(0);
+
+  const inputLabel = React.useRef(null);
+  const [labelWidth, setLabelWidth] = React.useState(0);
+  React.useEffect(() => {
+    setLabelWidth(inputLabel.current.offsetWidth);
+  }, []);
 
   let history = useHistory();
 
@@ -137,14 +143,15 @@ export default function SimpleSelect(props) {
               label="Nafn Æfingarprógrams"
               margin="normal"
               onChange={onChange}
+              variant="outlined"
             />
           </div>
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="select-simple">Skjólstæðingur</InputLabel>
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel ref={inputLabel} htmlFor="select-simple">Skjólstæðingur</InputLabel>
             <Select
               value={clients}
               onChange={handleChange}
-              input={<Input id="select-simple" />}
+              input={<OutlinedInput labelWidth={labelWidth} name="Skjólstæðingur" id="select-simple" />}
             >
               {props.clients.map((user, index) =>
                 <MenuItem key={index} value={user.id}>

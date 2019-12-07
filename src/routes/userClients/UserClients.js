@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import ListClients from '../../components/listClients/ListClients';
 import { Context } from '../../UserContext';
+import './UserClients.scss';
 
 class UserClients extends React.Component {
 
@@ -35,7 +36,7 @@ class UserClients extends React.Component {
       <Context.Consumer>
         {({ authenticated }) => {
           return (
-            <div>
+            <div className="Container">
               {authenticated && (
                 <div className="form-container">
                   <ListClients

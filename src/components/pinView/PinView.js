@@ -36,6 +36,10 @@ const useStyles = makeStyles(theme => ({
   margin: {
     margin: theme.spacing(1),
   },
+  Button: {
+    height: '50px',
+    fontSize: 'large',
+  }
 }));
 
 export default function PinView(props) {
@@ -80,10 +84,10 @@ export default function PinView(props) {
   }
 
   return (
-    <div>
-      <div className="pin_container">
+    <div className="pin_container">
+      <div className="pin_view">
         <ThemeProvider theme={theme}>
-          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          <Button className={classes.Button} variant="contained" color="primary" onClick={handleClickOpen}>
             Opna æfingarprógram
           </Button>
           <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

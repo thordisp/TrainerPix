@@ -14,7 +14,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { listClients } from '../../api';
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
+  { id: 'name', label: 'Nafn', minWidth: 170 },
   { id: 'email', label: 'Email', minWidth: 170 },
   { id: 'pin', label: 'Pin', minWidth: 100, align: 'right'},
 ];
@@ -48,6 +48,7 @@ const useStyles = makeStyles(theme => ({
   },
   root: {
     width: '100%',
+    height: '100%',
     display: 'flex',
     flexWrap: 'wrap',
     flexDirection: 'column',

@@ -39,6 +39,9 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  Button: {
+    fontSize: 'medium',
+  }
 }));
 
 export default function User() {
@@ -86,13 +89,13 @@ export default function User() {
             <ThemeProvider theme={theme}>
               <Fragment>
                 <NavLink exact to="/client/programs">
-                  <Button color="secondary">Skoða Æfingarprógram</Button>
+                  <Button className={classes.Button} color="secondary">Skoða Æfingarprógram</Button>
                 </NavLink>
                 <NavLink activeClassName="user__link--selected" className="user__link" to="/register">
-                  <Button color="secondary">Nýskrá</Button>
+                  <Button className={classes.Button} color="secondary">Nýskrá</Button>
                 </NavLink>
                 <NavLink activeClassName="user__link--selected" className="user__link" to="/login">
-                  <Button color="secondary">Innskrá</Button>
+                  <Button className={classes.Button} color="secondary">Innskrá</Button>
                 </NavLink>
               </Fragment>
             </ThemeProvider>
