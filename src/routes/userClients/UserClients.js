@@ -39,6 +39,7 @@ class UserClients extends React.Component {
             <div className="Container">
               {authenticated && (
                 <div className="form-container">
+                  <h2>Mínir Skjólstæðingar</h2>
                   <ListClients
                     clients = {this.state.clients}
                     updateClients={this.updateClients}

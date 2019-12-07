@@ -1,5 +1,7 @@
 @import '../../config.scss';
 
-.Container {
-  height: calc(100vh - 109px);
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
