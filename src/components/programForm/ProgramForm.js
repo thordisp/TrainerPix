@@ -88,10 +88,10 @@ export default function SimpleSelect(props) {
 
     if (!created.ok) {
       // setErrors(created.result);
-      console.log('Villa við að búa til prógram.');
+      console.log('Villa við að búa til prógramm.');
       console.log('Villa: ' + created.result);
     } else {
-      console.log('Nýtt prógram hefur verið búið til.');
+      console.log('Nýtt prógramm hefur verið búið til.');
     }
     // get programId from results.
     const programId = created.result.id;
@@ -133,14 +133,14 @@ export default function SimpleSelect(props) {
   return (
     <ThemeProvider theme={theme}>
       <div className="SelectContainer">
-        <h1>Nýtt Æfingarprógram</h1>
+        <h1>Nýtt Æfingarprógramm</h1>
         <form className={classes.root} onSubmit={onSubmit} autoComplete="off">
           <div>
             <TextField
               id="name"
               name="name"
               className={classes.textField}
-              label="Nafn Æfingarprógrams"
+              label="Nafn Æfingarprógramms"
               margin="normal"
               onChange={onChange}
               variant="outlined"
@@ -161,7 +161,7 @@ export default function SimpleSelect(props) {
             </Select>
           </FormControl>
           <div className="buttonWrapper">
-            <Button color="primary" variant="contained" type="submit">Búta til prógram</Button>
+            <Button color="primary" variant="contained" type="submit">Búta til prógramm</Button>
           </div>
         </form>
       </div>

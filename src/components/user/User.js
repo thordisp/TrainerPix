@@ -89,7 +89,7 @@ export default function User() {
             <ThemeProvider theme={theme}>
               <Fragment>
                 <NavLink exact to="/client/programs">
-                  <Button className={classes.Button} color="secondary">Skoða Æfingarprógram</Button>
+                  <Button className={classes.Button} color="secondary">Skoða Æfingarprógramm</Button>
                 </NavLink>
                 <NavLink activeClassName="user__link--selected" className="user__link" to="/register">
                   <Button className={classes.Button} color="secondary">Nýskrá</Button>
@@ -129,7 +129,7 @@ export default function User() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={toNewProgram}>Nýtt Æfingarprógram</MenuItem>
+                <MenuItem onClick={toNewProgram}>Nýtt Æfingarprógramm</MenuItem>
                 <MenuItem onClick={toNewClient}>Nýr Skjólstæðingur</MenuItem>
                 <MenuItem onClick={toUserClients}>Mínir Skjólstæðingar</MenuItem>
                 <MenuItem onClick={onClick(logoutUser)}>Útskrá</MenuItem>

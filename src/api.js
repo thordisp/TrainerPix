@@ -3,7 +3,7 @@ import 'isomorphic-fetch';
 const apiUrl = 'http://localhost:5000';
 
 /**
- * Býr til nýtt prógram.
+ * Býr til nýtt prógramm.
  * @param {*} userId
  * @param {*} clientId
  * @param {*} link
@@ -106,7 +106,7 @@ export async function getAccessToPrograms(pin) {
 }
 
 /**
- * Skilar æfingum fyrir valið prógram.
+ * Skilar æfingum fyrir valið prógramm.
  * @param {*} id userId
  */
 export async function getExercises(userId, programId) {

@@ -88,13 +88,13 @@ export default function PinView(props) {
       <div className="pin_view">
         <ThemeProvider theme={theme}>
           <Button className={classes.Button} variant="contained" color="primary" onClick={handleClickOpen}>
-            Opna æfingarprógram
+            Opna æfingarprógramm
           </Button>
           <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Staðfesta Aðgang</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                Vinsamlegast ritið hér að neðan gefið pin númer til að sjá æfingarprógram.
+                Vinsamlegast ritið hér að neðan gefið pin númer til að sjá æfingarprógramm.
               </DialogContentText>
                 <TextField
                   className={classes.margin}

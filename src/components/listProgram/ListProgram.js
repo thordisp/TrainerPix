@@ -105,7 +105,7 @@ export default function ListProgram(props) {
           </Table>
         </Paper>
       <div className="button-container">
-        <Button variant="contained" color="secondary" onClick={onClick}>Búa til Áætlun</Button>
+        <Button variant="contained" color="secondary" onClick={onClick}>Búa til Prógramm</Button>
       </div>
       </ThemeProvider>
     </div>

@@ -14,7 +14,7 @@ async function insertProgram(userId, clientId, name, link) {
   return query(q, [ userId, clientId, name, link ]);
 }
 
-// Býr til nýtt prógram.
+// Býr til nýtt prógramm.
 async function addProgram(req, res) {
   const { userId, clientId, name, link } = req.body;
 

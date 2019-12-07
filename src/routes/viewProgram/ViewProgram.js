@@ -43,7 +43,7 @@ class ViewProgram extends React.Component {
           <div>
             <h2>Þú hefur ekki aðgang að þessari síðu, pin vantar.</h2>
             <NavLink exact to="/client/programs">
-              <Button color="secondary">Skoða Æfingarprógram</Button>
+              <Button color="secondary">Skoða Æfingarprógramm</Button>
             </NavLink>
           </div>
         )}
