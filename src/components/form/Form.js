@@ -110,6 +110,16 @@ export default function Form(props) {
     props.toggleCam1Button();
   }
 
+  function retakeFirstImage(e) {
+    e.preventDefault();
+    props.updateFirstImage('');
+  }
+
+  function retakeSecondImage(e) {
+    e.preventDefault();
+    props.updateSecondImage('');
+  }
+
   return (
     <div className={classes.root}>
         <Container maxWidth="lg">
@@ -170,7 +180,7 @@ export default function Form(props) {
                   />
                 </CardActionArea>
                 <CardActions className={classes.root}>
-                  <Button color="primary">
+                  <Button onClick={retakeFirstImage} color="primary">
                     Retake
                   </Button>
                 </CardActions>
@@ -190,7 +200,7 @@ export default function Form(props) {
                   />
                 </CardActionArea>
                 <CardActions className={classes.root}>
-                  <Button color="primary">
+                  <Button onClick={retakeSecondImage} color="primary">
                     Retake
                   </Button>
                 </CardActions>
