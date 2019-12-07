@@ -5,7 +5,6 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/header/Header';
 
 import Home from './routes/home/Home';
-import About from './routes/about/About';
 import NewProgram from './routes/newProgram/NewProgram';
 import NewExercise from './routes/newExercise/NewExercise';
 import UserClients from './routes/userClients/UserClients';
@@ -38,7 +37,6 @@ function App(props: Props) {
         <main className="main__content">
           <Switch location={props.location}>
             <Route path="/" exact component={Home} />
-            <Route path="/about" exact component={About} />
             <Route path="/program" exact component={NewProgram} />
             <Route path="/program/:programId/add/:clientId" exact component={NewExercise} />
             <Route path="/my_clients" exact component={UserClients} />

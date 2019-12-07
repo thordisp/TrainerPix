@@ -58,9 +58,6 @@ export default function Home(props) {
                 <img className="headerLogo" src={logo} alt="Logo" />
               </NavLink>
             </Typography>
-            <NavLink exact to="/about">
-              <Button className={classes.Button} color="secondary">Um Okkur</Button>
-            </NavLink>
             <User />
           </Toolbar>
         </AppBar>
