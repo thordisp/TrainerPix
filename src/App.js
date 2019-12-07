@@ -37,7 +37,7 @@ function App(props: Props) {
         <main className="main__content">
           <Switch location={props.location}>
             <Route path="/" exact component={Home} />
-            <Route path="/program" exact component={NewProgram} />
+            <Route path="/" exact component={NewProgram} />
             <Route path="/program/:programId/add/:clientId" exact component={NewExercise} />
             <Route path="/my_clients" exact component={UserClients} />
             <Route path="/client/programs" exact component={AccessProgram} />

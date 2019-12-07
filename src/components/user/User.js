@@ -67,7 +67,7 @@ export default function User() {
 
   function toNewProgram() {
     setAnchorEl(null);
-    history.push('/program');
+    history.push('/');
   }
 
   function toNewClient() {
